@@ -29,7 +29,7 @@ const allImpressions = [
 
 <Layout title="Dorothea Urbantat | Geigenbaumeisterin">
   <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#720505] selection:text-white">
-
+    
     {/* === NAV === */}
     <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
@@ -48,9 +48,9 @@ const allImpressions = [
         </button>
       </div>
       {/* Mobile menu overlay */}
-      <div id="mobile-menu" class="md:hidden fixed inset-0 top-16 bg-[#F9F6F1] flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40">
-        {nav.map(l => (
-          <a href={l.href} class="mobile-nav-link font-heading text-xl tracking-[0.2em] text-[#1a1a1a] uppercase hover:text-[#720505] transition-colors">{l.label}</a>
+      <div id="mobile-menu" class="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-[#F9F6F1] border-t border-[#e0d6c8] flex flex-col items-center justify-center gap-6 py-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40 shadow-lg">
+        {nav.map((l, i) => (
+          <a href={l.href} class="mobile-nav-link font-heading text-lg tracking-[0.2em] text-[#1a1a1a] uppercase hover:text-[#720505] transition-colors px-6 py-3" style={`transition-delay: ${i * 50}ms`}>{l.label}</a>
         ))}
       </div>
     </nav>
@@ -255,13 +255,15 @@ const allImpressions = [
     if (!btn || !menu) return;
 
     btn.addEventListener('click', () => {
-      const isOpen = !menu.classList.contains('pointer-events-none');
+      const isOpen = menu.classList.contains('opacity-100');
       if (isOpen) {
+        menu.classList.remove('opacity-100');
         menu.classList.add('opacity-0', 'pointer-events-none');
         btn.classList.remove('menu-open');
         document.body.style.overflow = '';
       } else {
         menu.classList.remove('opacity-0', 'pointer-events-none');
+        menu.classList.add('opacity-100');
         btn.classList.add('menu-open');
         document.body.style.overflow = 'hidden';
       }
@@ -270,6 +272,7 @@ const allImpressions = [
     // Close menu when clicking a link
     menu.querySelectorAll('.mobile-nav-link').forEach(link => {
       link.addEventListener('click', () => {
+        menu.classList.remove('opacity-100');
         menu.classList.add('opacity-0', 'pointer-events-none');
         btn.classList.remove('menu-open');
         document.body.style.overflow = '';
