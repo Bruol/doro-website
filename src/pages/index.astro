@@ -1,11 +1,282 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Lightbox from '../components/Lightbox.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteData } from '../data/content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const nav = [
+  { href: '#about', label: 'Über mich' },
+  { href: '#leistungen', label: 'Leistungen' },
+  { href: '#instrumente', label: 'Instrumente' },
+  { href: '#kontakt', label: 'Kontakt' }
+];
+
+const allInstruments = [
+  ...siteData.instrumente.alemannische.images,
+  ...siteData.instrumente.italienische.images,
+];
+const allOriginals = [
+  ...siteData.instrumente.alemannische.originals,
+  ...siteData.instrumente.italienische.originals,
+];
+
+const allImpressions = [
+  ...siteData.impressionen.veranstaltungen.map(v => ({ ...v, category: 'Veranstaltung' })),
+  ...siteData.impressionen.kunden.map(k => ({ ...k, category: 'Kunde' })),
+  ...siteData.impressionen.presse.map(p => ({ ...p, category: 'Presse' })),
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Dorothea Urbantat | Geigenbaumeisterin">
+  <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#720505] selection:text-white">
+
+    {/* === NAV === */}
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+        <a href="#" class="font-heading text-sm sm:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-[#1a1a1a]">DOROTHEA URBANTAT</a>
+        {/* Desktop nav */}
+        <div class="hidden md:flex gap-10 font-heading text-xs tracking-[0.2em] text-[#6b6256] uppercase">
+          {nav.map(l => (
+            <a href={l.href} class="hover:text-[#720505] transition-colors duration-300">{l.label}</a>
+          ))}
+        </div>
+        {/* Mobile hamburger */}
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-[5px] p-2 -mr-2 cursor-pointer" aria-label="Menu">
+          <span class="hamburger-line block w-5 h-[2px] bg-[#1a1a1a] transition-all duration-300 origin-center"></span>
+          <span class="hamburger-line block w-5 h-[2px] bg-[#1a1a1a] transition-all duration-300"></span>
+          <span class="hamburger-line block w-5 h-[2px] bg-[#1a1a1a] transition-all duration-300 origin-center"></span>
+        </button>
+      </div>
+      {/* Mobile menu overlay */}
+      <div id="mobile-menu" class="md:hidden fixed inset-0 top-16 bg-[#F9F6F1]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+        {nav.map(l => (
+          <a href={l.href} class="mobile-nav-link font-heading text-xl tracking-[0.2em] text-[#1a1a1a] uppercase hover:text-[#720505] transition-colors">{l.label}</a>
+        ))}
+      </div>
+    </nav>
+
+    {/* === HERO === */}
+    <section class="relative min-h-[100svh] flex items-center justify-center pt-16 sm:pt-20">
+      <div class="absolute inset-0 opacity-[0.04]">
+        <img src={siteData.hero.image} alt="" class="w-full h-full object-cover" loading="eager" />
+      </div>
+      <div class="relative z-10 text-center mt-10 sm:mt-16 px-4">
+        <p class="font-heading text-[#720505] tracking-[0.3em] sm:tracking-[0.5em] uppercase text-[10px] sm:text-xs mb-8 sm:mb-10 reveal">Geigenbaumeisterin</p>
+        <h1 class="font-heading text-5xl min-[400px]:text-6xl sm:text-8xl lg:text-9xl text-[#1a1a1a] leading-[0.9] mb-4 sm:mb-6 reveal" style="transition-delay:100ms">
+          Dorothea<br/><span class="text-[#8c8273]">Urbantat</span>
+        </h1>
+        <div class="relative h-[35vh] sm:h-[50vh] flex justify-center items-center my-6 sm:my-8 reveal" style="transition-delay:200ms">
+          <div class="absolute w-48 sm:w-80 h-48 sm:h-80 rounded-full bg-[#720505]/5 blur-[60px] sm:blur-[100px]"></div>
+          <div class="absolute w-36 sm:w-60 h-36 sm:h-60 rounded-full bg-[#e0d6c8]/40 blur-[50px] sm:blur-[80px]"></div>
+          <img src={siteData.instrumente.alemannische.images[0]} alt="Violine" class="relative z-10 h-full w-auto object-contain drop-shadow-2xl hover:scale-[1.03] transition-transform duration-1000" />
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 sm:gap-12 font-heading text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#6b6256] reveal mb-16 sm:mb-24" style="transition-delay:300ms">
+          {siteData.hero.pillars.map((p, i) => (
+            <span class="relative">
+              {i === 0 && <span class="absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#720505]"></span>}
+              {p}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* === ABOUT === */}
+    <section id="about" class="py-16 sm:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-start">
+          <div class="flex justify-center lg:sticky lg:top-32 reveal">
+            <img src={siteData.about.portrait} alt="Dorothea Urbantat" class="h-[300px] sm:h-[500px] w-auto object-contain drop-shadow-xl" />
+          </div>
+          <div class="reveal" style="transition-delay:100ms">
+            <div class="w-10 h-[3px] bg-[#720505] mb-6 sm:mb-8"></div>
+            <h2 class="font-heading text-3xl sm:text-4xl text-[#1a1a1a] mb-8 sm:mb-10">{siteData.about.title}</h2>
+            <div class="space-y-4 sm:space-y-5 text-base sm:text-lg text-[#4a4238] font-light leading-relaxed">
+              {siteData.about.paragraphs.map(p => <p>{p}</p>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* === IMPRESSIONEN === */}
+    <section class="py-12 sm:py-20 bg-[#F9F6F1] overflow-hidden relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12 reveal">
+        <div class="flex items-center gap-3 sm:gap-4 mb-2">
+          <div class="w-6 sm:w-8 h-[2px] bg-[#720505]"></div>
+          <h3 class="font-heading text-xl sm:text-2xl text-[#1a1a1a]">{siteData.impressionen.title}</h3>
+        </div>
+        <p class="text-[#8c8273] text-sm font-light">Veranstaltungen, Kunden & Presse</p>
+      </div>
+
+      {/* Fade edges */}
+      <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-[#F9F6F1] to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-[#F9F6F1] to-transparent z-10 pointer-events-none"></div>
+
+      <div class="impressions-track flex gap-4 sm:gap-6 px-4 sm:px-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
+        {allImpressions.map(item => (
+          <div class="flex-none w-[260px] sm:w-[320px] snap-start bg-white rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#e0d6c8]/50">
+            <span class="inline-block px-3 py-1 rounded-full text-[10px] font-heading tracking-[0.15em] uppercase bg-[#720505]/10 text-[#720505] mb-3 sm:mb-4">{item.category}</span>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="block text-[#1a1a1a] font-medium text-sm leading-relaxed hover:text-[#720505] transition-colors">
+                {item.text}
+                <span class="block mt-2 sm:mt-3 text-[#720505] font-heading text-xs tracking-wider uppercase">Mehr erfahren &rarr;</span>
+              </a>
+            ) : (
+              <p class="text-[#1a1a1a] font-medium text-sm leading-relaxed">{item.text}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* === LEISTUNGEN === */}
+    <section id="leistungen" class="py-16 sm:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 reveal">
+          <div class="w-8 sm:w-10 h-[3px] bg-[#720505]"></div>
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#1a1a1a]">Leistungen</h2>
+        </div>
+        <p class="text-[#8c8273] text-sm sm:text-base font-light mb-12 sm:mb-24 reveal">Vom Neubau bis zur Reparatur</p>
+        <div class="space-y-16 sm:space-y-28">
+          {siteData.leistungen.items.map((item, i) => {
+            const isSmall = item.id === 'neubau' || item.id === 'leihinstrumente';
+            return (
+              <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 items-center reveal">
+                <div class={`lg:col-span-3 ${i % 2 === 1 ? 'lg:order-2' : ''} order-2 lg:order-none`}>
+                  <span class="font-heading text-[#720505] text-4xl sm:text-5xl opacity-25 block mb-2 sm:mb-3">0{i + 1}</span>
+                  <h3 class="font-heading text-2xl sm:text-3xl mb-4 sm:mb-5 text-[#1a1a1a]">{item.title}</h3>
+                  <p class="text-[#4a4238] font-light leading-relaxed text-base sm:text-lg mb-4 sm:mb-6">{item.description}</p>
+                  {item.preise && (
+                    <ul class="space-y-3 font-heading text-sm tracking-wider text-[#6b6256]">
+                      {item.preise.map(p => (
+                        <li class="flex justify-between border-b border-[#e0d6c8] pb-2">
+                          <span>{p.label}</span>
+                          <span class="text-[#720505] font-semibold">{p.price}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <div class={`lg:col-span-2 ${i % 2 === 1 ? 'lg:order-1' : ''} order-1 lg:order-none flex justify-center`}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    class={`h-auto rounded-sm shadow-lg ${isSmall ? 'w-[140px] sm:w-[200px]' : 'w-[180px] sm:w-full sm:max-w-xs'}`}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* === INSTRUMENTE === */}
+    <section id="instrumente" class="py-16 sm:py-32 bg-black text-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 sm:mb-16 reveal">
+        <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div class="w-8 sm:w-10 h-[3px] bg-[#720505]"></div>
+          <h2 class="font-heading text-3xl sm:text-4xl">Meisterinstrumente</h2>
+        </div>
+        <p class="font-heading tracking-[0.2em] sm:tracking-[0.3em] text-[#8c8273] uppercase text-[10px] sm:text-xs">Alemannische & Italienische Bauweise</p>
+      </div>
+      <div class="flex overflow-x-auto pb-10 sm:pb-16 px-4 sm:px-6 gap-8 sm:gap-16 snap-x snap-mandatory hide-scrollbar">
+        {allInstruments.map((img, i) => (
+          <div class="flex-none w-[200px] sm:w-[280px] h-[360px] sm:h-[520px] snap-center flex items-center justify-center relative group" data-lightbox-src={allOriginals[i]}>
+            <div class="absolute inset-x-4 sm:inset-x-6 bottom-4 sm:bottom-6 h-10 sm:h-16 bg-white/10 blur-2xl rounded-full scale-50 group-hover:scale-100 transition-transform duration-1000"></div>
+            <img src={img} alt={`Instrument ${i+1}`} class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]" loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <Lightbox theme="dark" />
+    </section>
+
+    {/* === KONTAKT === */}
+    <section id="kontakt" class="py-16 sm:py-32 bg-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 reveal">
+        <div class="flex items-center justify-center gap-3 sm:gap-4 mb-4">
+          <div class="w-8 sm:w-10 h-[3px] bg-[#720505]"></div>
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#1a1a1a]">{siteData.kontakt.title}</h2>
+          <div class="w-8 sm:w-10 h-[3px] bg-[#720505]"></div>
+        </div>
+        <p class="text-[#6b6256] font-light text-base sm:text-lg text-center mb-8 sm:mb-12 max-w-xl mx-auto">{siteData.kontakt.intro}</p>
+        <ContactForm theme="warm" />
+        <p class="text-center text-sm text-[#8c8273] mt-8 sm:mt-10 italic">{siteData.kontakt.greeting}</p>
+      </div>
+    </section>
+
+    <footer class="py-12 sm:py-16 bg-[#1a1a1a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center gap-8 sm:gap-6 sm:flex-row sm:justify-between font-heading text-[10px] sm:text-[11px] tracking-[0.2em] text-[#8c8273]">
+        <div class="flex flex-col items-center sm:items-start gap-3">
+          <p>&copy; {new Date().getFullYear()} Dorothea Urbantat.</p>
+          <div class="flex gap-4">
+            <a href="/impressum" class="hover:text-[#720505] transition-colors">Impressum</a>
+            <a href="/datenschutz" class="hover:text-[#720505] transition-colors">Datenschutzerklärung</a>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+          <a href={`tel:${siteData.impressum.kontakt.telefon}`} class="hover:text-[#720505] transition-colors">{siteData.impressum.kontakt.telefon}</a>
+          <a href={`mailto:${siteData.impressum.kontakt.email}`} class="hover:text-[#720505] transition-colors">{siteData.impressum.kontakt.email}</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </Layout>
+
+<style>
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Hamburger animation */
+  .menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  function initPage() {
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile menu
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('pointer-events-none');
+      if (isOpen) {
+        menu.classList.add('opacity-0', 'pointer-events-none');
+        btn.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      } else {
+        menu.classList.remove('opacity-0', 'pointer-events-none');
+        btn.classList.add('menu-open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close menu when clicking a link
+    menu.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('opacity-0', 'pointer-events-none');
+        btn.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initPage);
+  document.addEventListener('astro:page-load', initPage);
+</script>

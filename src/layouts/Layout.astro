@@ -1,23 +1,118 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  themeColor?: string;
+  image?: string;
+}
+
+const { 
+  title = "Dorothea Urbantat | Geigenbaumeisterin", 
+  description = "Geigenbau-Meisterin Dorothea Urbantat - Van der Woerd. Neubau, Reparatur, Setup & Kurse in Wegscheid und Markneukirchen.",
+  themeColor = "#720505",
+  image = "/assets/images/01-about.webp"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://geigenbau-meisterin.de");
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Dorothea Urbantat Geigenbau",
+  "image": new URL(image, Astro.site || "https://geigenbau-meisterin.de").toString(),
+  "description": description,
+  "url": Astro.site || "https://geigenbau-meisterin.de",
+  "telephone": "015735230786",
+  "email": "info@geigenbau-meisterin.de",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Thalberg-Steindlbach 3",
+      "postalCode": "94110",
+      "addressLocality": "Wegscheid",
+      "addressCountry": "DE"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Gunzener Straße 5",
+      "postalCode": "08258",
+      "addressLocality": "Markneukirchen-Breitenfeld",
+      "addressCountry": "DE"
+    }
+  ],
+  "priceRange": "$$$"
+};
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <title>{title}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, canonicalURL)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, canonicalURL)} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Julius+Sans+One&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="antialiased min-h-screen text-gray-900 bg-white selection:bg-[#720505] selection:text-white">
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --color-primary: #720505;
+    --color-header: #27313E;
+    --color-gray: #959595;
+    --color-dark-gray: #3c3c3c;
+    --color-border: #282828;
+  }
+  
+  /* Utilities for the custom fonts */
+  .font-heading {
+    font-family: 'Julius Sans One', sans-serif;
+  }
+  .font-body {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /* Optional smooth reveal animation classes */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>

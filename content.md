@@ -1,6 +1,6 @@
 # Geigenbau-Meisterin | Dorothea Urbantat - Van der Woerd
 
-Source: https://geigenbau-meisterin.de/
+
 
 ---
 
@@ -37,7 +37,7 @@ Dorothea Urbantat
 
 ## Über mich
 
-Source: https://geigenbau-meisterin.de/about/
+
 
 Von 2006 bis 2009 absolvierte ich die Ausbildung zur Geigenbau Gesellin an der Staatlichen Fachschule für Musikinstrumentenbau in Mittenwald.
 
@@ -51,7 +51,7 @@ Arbeitsschwerpunkte sind die Restaurierung von Saiteninstrumenten sowie der Bau 
 
 ## Impressionen
 
-Source: https://geigenbau-meisterin.de/about/impressionen
+
 
 ### Veranstaltungen
 
@@ -78,7 +78,7 @@ Source: https://geigenbau-meisterin.de/about/impressionen
 
 ## Leistungen
 
-Source: https://geigenbau-meisterin.de/Leistungen/
+
 
 ### Leistungen Overview
 
@@ -92,7 +92,7 @@ Source: https://geigenbau-meisterin.de/Leistungen/
 
 ## Neubau
 
-Source: https://geigenbau-meisterin.de/Leistungen/neubau
+
 
 Ich kreiere Ihnen mit Ihrer Hilfe und Zusammenarbeit das Instrument Ihrer Wünsche. Zur Auswahl stehen klassische Modelle italienischer Bauweise sowie aufwändig verzierte Instrumente nordalpiner Geigenbaukunst.
 
@@ -102,7 +102,7 @@ Durch persönliche Absprachen und regelmäßige Treffen während des Bauprozesse
 
 ## Reparatur
 
-Source: https://geigenbau-meisterin.de/Leistungen/reparatur
+
 
 Ihre Lieblingsstücke sind bei mir in besten Händen: vom Kratzer bis zum Riss, vom neuen Steg bis zum restaurierten Griffbrett, von der abgenutzten Spielstelle zum gereinigten Instrument wird alles von mir professionell restauriert.
 
@@ -110,7 +110,7 @@ Ihre Lieblingsstücke sind bei mir in besten Händen: vom Kratzer bis zum Riss, 
 
 ## Persönliches Setup
 
-Source: https://geigenbau-meisterin.de/Leistungen/pers%C3%B6nliches%20setup
+
 
 Ich helfen Ihnen dabei, aus Ihren Lieblingsstücken den Klang hervor zu zaubern, von dem Sie schon immer geträumt haben.
 
@@ -118,7 +118,7 @@ Ich helfen Ihnen dabei, aus Ihren Lieblingsstücken den Klang hervor zu zaubern,
 
 ## Kurse & Workshops
 
-Source: https://geigenbau-meisterin.de/Leistungen/Kurse%20und%20Workshops
+
 
 Hatten Sie jemals den Wunsch, auf einem von Ihnen selbst gebauten Instrument zu spielen? In meiner Werkstatt können Sie Ihren Traum verwirklichen.
 
@@ -136,7 +136,7 @@ Unter meiner Anleitung werden dann, je nach Ihren handwerklichen Fähigkeiten, F
 
 ## Leihinstrumente
 
-Source: https://geigenbau-meisterin.de/Leistungen/Leihinstrumente
+
 
 Leihen Sie bei mir ein Schülerinstrument für Ihr Kind und lassen Sie sich die Miete auf Ihr bei mir gefertigtes Meisterinstrument anrechnen. Ein Mietkauf lohnt sich, denn Klang bildet.
 
@@ -144,7 +144,7 @@ Leihen Sie bei mir ein Schülerinstrument für Ihr Kind und lassen Sie sich die 
 
 ## Alemannische Instrumente
 
-Source: https://geigenbau-meisterin.de/alemannische-intrumente
+
 
 Instrumente in Alemannischer Bauweise (Model 1665):
 
@@ -155,7 +155,7 @@ Instrumente in Alemannischer Bauweise (Model 1665):
 
 ## Italienische Instrumente
 
-Source: https://geigenbau-meisterin.de/italienische-instrumente
+
 
 Instrumente in Italienischer Bauweise:
 
@@ -166,7 +166,7 @@ Instrumente in Italienischer Bauweise:
 
 ## Kontakt
 
-Source: https://geigenbau-meisterin.de/kontakt
+
 
 **Schreiben Sie mir...**
 
@@ -180,7 +180,7 @@ Dorothea van der Woerd
 
 ## Impressum
 
-Source: https://geigenbau-meisterin.de/impressum
+
 
 ### Angaben gemäß § 5 TMG:
 

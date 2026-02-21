@@ -1,0 +1,77 @@
+---
+/**
+ * Contact form component with Name, Email, Nachricht fields.
+ * Styling is controlled by the parent via CSS variables and class props.
+ */
+interface Props {
+  theme?: 'light' | 'dark' | 'warm' | 'cool';
+}
+const { theme = 'light' } = Astro.props;
+
+const themes = {
+  light: {
+    input: 'bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#720505] focus:ring-[#720505]/10',
+    label: 'text-gray-600',
+    button: 'bg-[#27313E] text-white hover:bg-[#720505]',
+  },
+  dark: {
+    input: 'bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-red-500 focus:ring-red-500/10',
+    label: 'text-gray-400',
+    button: 'bg-red-700 text-white hover:bg-red-600',
+  },
+  warm: {
+    input: 'bg-[#faf8f5] border-[#e2d5c8] text-[#4a4238] placeholder:text-[#b5a898] focus:border-[#720505] focus:ring-[#720505]/10',
+    label: 'text-[#8c8273]',
+    button: 'bg-[#720505] text-[#faf8f5] hover:bg-[#8f0606]',
+  },
+  cool: {
+    input: 'bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-gray-900 focus:ring-gray-900/10',
+    label: 'text-gray-500',
+    button: 'bg-gray-900 text-white hover:bg-[#720505]',
+  },
+};
+
+const t = themes[theme];
+---
+
+<form class="w-full space-y-6" action="#" method="POST" data-contact-form>
+  <div>
+    <label for="name" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>Name</label>
+    <input 
+      type="text" 
+      id="name" 
+      name="name" 
+      required 
+      placeholder="Ihr Name"
+      class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 ${t.input}`}
+    />
+  </div>
+  <div>
+    <label for="email" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>E-Mail</label>
+    <input 
+      type="email" 
+      id="email" 
+      name="email" 
+      required 
+      placeholder="ihre@email.de"
+      class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 ${t.input}`}
+    />
+  </div>
+  <div>
+    <label for="nachricht" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>Nachricht</label>
+    <textarea 
+      id="nachricht" 
+      name="nachricht" 
+      rows="5" 
+      required 
+      placeholder="Ihre Nachricht..."
+      class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 resize-y ${t.input}`}
+    ></textarea>
+  </div>
+  <button 
+    type="submit" 
+    class={`w-full font-heading tracking-[0.2em] text-sm uppercase px-8 py-5 rounded-sm transition-all duration-300 cursor-pointer ${t.button}`}
+  >
+    Nachricht senden
+  </button>
+</form>
