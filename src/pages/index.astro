@@ -31,7 +31,7 @@ const allImpressions = [
   <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#720505] selection:text-white">
     
     {/* === NAV === */}
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8]">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8] ">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         <a href="#" class="font-heading text-sm sm:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-[#1a1a1a]">DOROTHEA URBANTAT</a>
         {/* Desktop nav */}
@@ -47,13 +47,13 @@ const allImpressions = [
           <span class="hamburger-line block w-5 h-[2px] bg-[#1a1a1a] transition-all duration-300 origin-center"></span>
         </button>
       </div>
-      {/* Mobile menu overlay */}
-      <div id="mobile-menu" class="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-[#F9F6F1] border-t border-[#e0d6c8] flex flex-col items-center justify-center gap-6 py-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40 shadow-lg">
-        {nav.map((l, i) => (
-          <a href={l.href} class="mobile-nav-link font-heading text-lg tracking-[0.2em] text-[#1a1a1a] uppercase hover:text-[#720505] transition-colors px-6 py-3" style={`transition-delay: ${i * 50}ms`}>{l.label}</a>
-        ))}
-      </div>
     </nav>
+    {/* Mobile menu overlay — outside nav to avoid backdrop-filter containing block issues */}
+    <div id="mobile-menu" class="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-[#F9F6F1] border-t border-[#e0d6c8] flex flex-col items-center justify-center gap-6 py-8 opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+      {nav.map((l, i) => (
+        <a href={l.href} class="mobile-nav-link font-heading text-lg tracking-[0.2em] text-[#1a1a1a] uppercase hover:text-[#720505] transition-colors px-6 py-3" style={`transition-delay: ${i * 50}ms`}>{l.label}</a>
+      ))}
+    </div>
 
     {/* === HERO === */}
     <section class="relative min-h-[100svh] flex items-center justify-center pt-16 sm:pt-20">
