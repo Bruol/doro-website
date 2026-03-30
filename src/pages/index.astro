@@ -1,14 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Lightbox from '../components/Lightbox.astro';
-import ContactForm from '../components/ContactForm.astro';
-import { siteData } from '../data/content';
+import Layout from "../layouts/Layout.astro";
+import Lightbox from "../components/Lightbox.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { siteData } from "../data/content";
 
 const nav = [
-  { href: '#about', label: 'Über mich' },
-  { href: '#leistungen', label: 'Leistungen' },
-  { href: '#instrumente', label: 'Instrumente' },
-  { href: '#kontakt', label: 'Kontakt' }
+  { href: "#about", label: "Über mich" },
+  { href: "#leistungen", label: "Leistungen" },
+  { href: "#instrumente", label: "Instrumente" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
 const allInstruments = [
@@ -21,64 +21,136 @@ const allOriginals = [
 ];
 
 const allImpressions = [
-  ...siteData.impressionen.veranstaltungen.map(v => ({ ...v, category: 'Veranstaltung' })),
-  ...siteData.impressionen.kunden.map(k => ({ ...k, category: 'Kunde' })),
-  ...siteData.impressionen.presse.map(p => ({ ...p, category: 'Presse' })),
+  ...siteData.impressionen.veranstaltungen.map((v) => ({
+    ...v,
+    category: "Veranstaltung",
+  })),
+  ...siteData.impressionen.kunden.map((k) => ({ ...k, category: "Kunde" })),
+  ...siteData.impressionen.presse.map((p) => ({ ...p, category: "Presse" })),
 ];
 ---
 
 <Layout title="Dorothea Urbantat | Geigenbaumeisterin">
-  <div class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white">
-    
+  <div
+    class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white"
+  >
     {/* === NAV === */}
-    <nav class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        <a href="#" class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]">DOROTHEA URBANTAT</a>
+    <nav
+      class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between"
+      >
+        <a
+          href="#"
+          class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]"
+          >DOROTHEA URBANTAT</a
+        >
         {/* Desktop nav */}
-        <div class="hidden gap-10 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex">
-          {nav.map(l => (
-            <a href={l.href} class="transition-colors duration-300 hover:text-brand">{l.label}</a>
-          ))}
+        <div
+          class="hidden gap-10 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex"
+        >
+          {
+            nav.map((l) => (
+              <a
+                href={l.href}
+                class="transition-colors duration-300 hover:text-brand"
+              >
+                {l.label}
+              </a>
+            ))
+          }
         </div>
         {/* Mobile hamburger */}
-        <button id="mobile-menu-btn" class="-mr-2 flex cursor-pointer flex-col gap-[5px] p-2 md:hidden" aria-label="Menu">
-          <span class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"></span>
-          <span class="hamburger-line block h-[2px] w-5 bg-ink transition-all duration-300"></span>
-          <span class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"></span>
+        <button
+          id="mobile-menu-btn"
+          class="-mr-2 flex cursor-pointer flex-col gap-[5px] p-2 md:hidden"
+          aria-label="Menu"
+        >
+          <span
+            class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"
+          ></span>
+          <span
+            class="hamburger-line block h-[2px] w-5 bg-ink transition-all duration-300"
+          ></span>
+          <span
+            class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"
+          ></span>
         </button>
       </div>
     </nav>
-    {/* Mobile menu overlay — outside nav to avoid backdrop-filter containing block issues */}
-    <div id="mobile-menu" class="fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col items-center justify-center gap-6 border-t border-line bg-surface py-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
-      {nav.map((l, i) => (
-        <a href={l.href} class="mobile-nav-link px-6 py-3 font-heading text-lg uppercase tracking-[0.2em] text-ink transition-colors hover:text-brand" style={`transition-delay: ${i * 50}ms`}>{l.label}</a>
-      ))}
+    {
+      /* Mobile menu overlay — outside nav to avoid backdrop-filter containing block issues */
+    }
+    <div
+      id="mobile-menu"
+      class="fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col items-center justify-center gap-6 border-t border-line bg-surface py-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+    >
+      {
+        nav.map((l, i) => (
+          <a
+            href={l.href}
+            class="mobile-nav-link px-6 py-3 font-heading text-lg uppercase tracking-[0.2em] text-ink transition-colors hover:text-brand"
+            style={`transition-delay: ${i * 50}ms`}
+          >
+            {l.label}
+          </a>
+        ))
+      }
     </div>
 
     {/* === HERO === */}
-    <section class="relative min-h-[100svh] flex items-center pt-16 sm:pt-20 bg-white">
+    <section
+      class="relative min-h-[100svh] flex items-center pt-16 sm:pt-20 bg-white"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 lg:py-0">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 lg:py-0"
+        >
           {/* Left side - Text content */}
-          <div class="text-center lg:text-left reveal order-2 lg:order-1 overflow-hidden">
-            <h1 class="mb-4 font-heading text-3xl uppercase tracking-[0.1em] text-brand min-[400px]:text-4xl sm:mb-6 sm:text-5xl lg:text-6xl">
-              Geigenbaumeisterin
+          <div
+            class="text-center lg:text-left reveal order-2 lg:order-1 overflow-hidden"
+          >
+            <h1
+              class="mb-4 font-heading text-3xl uppercase tracking-[0.1em] text-brand min-[400px]:text-4xl sm:mb-6 sm:text-5xl lg:text-6xl"
+            >
+              Geigenbau meisterin
             </h1>
-            <p class="mb-8 font-heading text-5xl leading-[0.95] text-panel min-[400px]:text-6xl sm:mb-10 sm:text-7xl lg:text-8xl">
-              DOROTHEA<br/>URBANTAT
-            </p>
-            <a href={`mailto:${siteData.impressum.kontakt.email}`} class="reveal mb-6 inline-block bg-brand px-6 py-3 font-heading text-sm tracking-[0.1em] text-white transition-colors duration-300 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base" style="transition-delay:100ms">
+            <a
+              href={`mailto:${siteData.impressum.kontakt.email}`}
+              class="reveal mb-6 inline-block bg-brand px-6 py-3 font-heading text-sm tracking-[0.1em] text-white transition-colors duration-300 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base"
+              style="transition-delay:100ms"
+            >
               {siteData.impressum.kontakt.email}
             </a>
-            <div class="reveal flex items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel sm:text-xl lg:justify-start" style="transition-delay:150ms">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <a href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, '')}`} class="transition-colors hover:text-brand">{siteData.impressum.kontakt.telefon}</a>
+            <div
+              class="reveal flex items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel sm:text-xl lg:justify-start"
+              style="transition-delay:150ms"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"
+                ><path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                ></path></svg
+              >
+              <a
+                href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, "")}`}
+                class="transition-colors hover:text-brand"
+                >{siteData.impressum.kontakt.telefon}</a
+              >
             </div>
           </div>
           {/* Right side - Violin image */}
-          <div class="relative flex justify-center lg:justify-end reveal order-1 lg:order-2" style="transition-delay:200ms">
+          <div
+            class="relative flex justify-center lg:justify-end reveal order-1 lg:order-2"
+            style="transition-delay:200ms"
+          >
             <div class="relative">
-              <img src={siteData.instrumente.alemannische.originals[0]} alt="Violine" class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto object-contain shadow-2xl" loading="eager" />
+              <img
+                src={"/assets/images/alemannische-01-no-bg.png"}
+                alt="Violine"
+                class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto bg-transparent object-contain lg:ml-12 xl:ml-16"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
@@ -88,141 +160,238 @@ const allImpressions = [
     {/* === ABOUT === */}
     <section id="about" class="bg-surface py-16 sm:py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-start">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-start"
+        >
           <div class="flex justify-center lg:sticky lg:top-32 reveal">
-            <img src={siteData.about.portrait} alt="Dorothea Urbantat" class="h-[300px] sm:h-[500px] w-auto object-contain drop-shadow-xl" />
+            <img
+              src={siteData.about.portrait}
+              alt="Dorothea Urbantat"
+              class="h-[300px] sm:h-[500px] w-auto object-contain drop-shadow-xl"
+            />
           </div>
           <div class="reveal" style="transition-delay:100ms">
             <div class="mb-6 h-[3px] w-10 bg-brand sm:mb-8"></div>
-            <h2 class="mb-8 font-heading text-3xl text-panel sm:mb-10 sm:text-4xl">{siteData.about.title}</h2>
-            <div class="space-y-4 text-base font-light leading-relaxed text-copy sm:space-y-5 sm:text-lg">
-              {siteData.about.paragraphs.map(p => <p>{p}</p>)}
+            <h2
+              class="mb-8 font-heading text-3xl text-panel sm:mb-10 sm:text-4xl"
+            >
+              {siteData.about.title}
+            </h2>
+            <div
+              class="space-y-4 text-base font-light leading-relaxed text-copy sm:space-y-5 sm:text-lg"
+            >
+              {siteData.about.paragraphs.map((p) => <p>{p}</p>)}
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    {/* === IMPRESSIONEN === */}
-    <section class="py-12 sm:py-20 bg-white overflow-hidden relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12 reveal">
-        <div class="mb-2 flex items-center gap-3 sm:gap-4">
-          <div class="h-[2px] w-6 bg-brand sm:w-8"></div>
-          <h3 class="font-heading text-xl text-panel sm:text-2xl">{siteData.impressionen.title}</h3>
-        </div>
-        <p class="text-sm font-light text-soft">Veranstaltungen, Kunden & Presse</p>
-      </div>
-
-      {/* Fade edges */}
-      <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-      <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-
-      <div class="impressions-track flex gap-4 sm:gap-6 px-4 sm:px-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
-        {allImpressions.map(item => (
-          <div class="flex-none snap-center rounded-lg border border-line/50 bg-surface p-4 shadow-sm transition-shadow duration-300 hover:shadow-md sm:w-[320px] sm:p-6">
-            <span class="mb-3 inline-block rounded-full bg-brand/10 px-3 py-1 font-heading text-[10px] uppercase tracking-[0.15em] text-brand sm:mb-4">{item.category}</span>
-            {item.url ? (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" class="block text-sm font-medium leading-relaxed text-panel transition-colors hover:text-brand">
-                {item.text}
-                <span class="mt-2 block font-heading text-xs uppercase tracking-wider text-brand sm:mt-3">Mehr erfahren &rarr;</span>
-              </a>
-            ) : (
-              <p class="text-sm font-medium leading-relaxed text-panel">{item.text}</p>
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
-
     {/* === LEISTUNGEN === */}
-    <section id="leistungen" class="bg-surface py-16 sm:py-32">
+    <section id="leistungen" class="bg-white py-16 sm:py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="reveal mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
-          <h2 class="font-heading text-3xl text-panel sm:text-4xl">Leistungen</h2>
+          <h2 class="font-heading text-3xl text-panel sm:text-4xl">
+            Leistungen
+          </h2>
         </div>
-        <p class="reveal mb-12 text-sm font-light text-soft sm:mb-24 sm:text-base">Vom Neubau bis zur Reparatur</p>
+        <p
+          class="reveal mb-12 text-sm font-light text-soft sm:mb-24 sm:text-base"
+        >
+          Vom Neubau bis zur Reparatur
+        </p>
         <div class="space-y-16 sm:space-y-28">
-          {siteData.leistungen.items.map((item, i) => {
-            const isSmall = item.id === 'neubau' || item.id === 'leihinstrumente';
-            return (
-              <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 items-center reveal">
-                <div class={`lg:col-span-3 ${i % 2 === 1 ? 'lg:order-2' : ''} order-2 lg:order-none`}>
-                  <span class="mb-2 block font-heading text-4xl text-brand/25 sm:mb-3 sm:text-5xl">0{i + 1}</span>
-                  <h3 class="mb-4 font-heading text-2xl text-panel sm:mb-5 sm:text-3xl">{item.title}</h3>
-                  <p class="mb-4 text-base font-light leading-relaxed text-copy sm:mb-6 sm:text-lg">{item.description}</p>
-                  {item.preise && (
-                    <ul class="space-y-3 font-heading text-sm tracking-wider text-muted">
-                      {item.preise.map(p => (
-                        <li class="flex justify-between border-b border-line pb-2">
-                          <span>{p.label}</span>
-                          <span class="font-semibold text-brand">{p.price}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+          {
+            siteData.leistungen.items.map((item, i) => {
+              const isSmall =
+                item.id === "neubau" || item.id === "leihinstrumente";
+              return (
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 items-center reveal">
+                  <div
+                    class={`lg:col-span-3 ${i % 2 === 1 ? "lg:order-2" : ""} order-2 lg:order-none`}
+                  >
+                    <span class="mb-2 block font-heading text-4xl text-brand/25 sm:mb-3 sm:text-5xl">
+                      0{i + 1}
+                    </span>
+                    <h3 class="mb-4 font-heading text-2xl text-panel sm:mb-5 sm:text-3xl">
+                      {item.title}
+                    </h3>
+                    <p class="mb-4 text-base font-light leading-relaxed text-copy sm:mb-6 sm:text-lg">
+                      {item.description}
+                    </p>
+                    {item.preise && (
+                      <ul class="space-y-3 font-heading text-sm tracking-wider text-muted">
+                        {item.preise.map((p) => (
+                          <li class="flex justify-between border-b border-line pb-2">
+                            <span>{p.label}</span>
+                            <span class="font-semibold text-brand">
+                              {p.price}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <div
+                    class={`lg:col-span-2 ${i % 2 === 1 ? "lg:order-1" : ""} order-1 lg:order-none flex justify-center`}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      class={`h-auto rounded-sm bg-transparent  ${isSmall ? "w-[140px] sm:w-[200px]" : "w-[180px] sm:w-full sm:max-w-xs"}`}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-                <div class={`lg:col-span-2 ${i % 2 === 1 ? 'lg:order-1' : ''} order-1 lg:order-none flex justify-center`}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    class={`h-auto rounded-sm shadow-lg ${isSmall ? 'w-[140px] sm:w-[200px]' : 'w-[180px] sm:w-full sm:max-w-xs'}`}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          }
         </div>
       </div>
     </section>
 
     {/* === INSTRUMENTE === */}
-    <section id="instrumente" class="overflow-hidden bg-panel py-16 text-white sm:py-32">
+    <section
+      id="instrumente"
+      class="overflow-hidden bg-panel py-16 text-white sm:py-32"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 sm:mb-16 reveal">
         <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
           <h2 class="font-heading text-3xl sm:text-4xl">Meisterinstrumente</h2>
         </div>
-        <p class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]">Alemannische & Italienische Bauweise</p>
+        <p
+          class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
+        >
+          Alemannische & Italienische Bauweise
+        </p>
       </div>
-      <div class="flex overflow-x-auto pb-10 sm:pb-16 px-4 sm:px-6 gap-8 sm:gap-16 snap-x snap-mandatory hide-scrollbar">
-        {allInstruments.map((img, i) => (
-          <div class="flex-none w-[200px] sm:w-[280px] h-[360px] sm:h-[520px] snap-center flex items-center justify-center relative group" data-lightbox-src={allOriginals[i]}>
-            <div class="absolute inset-x-4 sm:inset-x-6 bottom-4 sm:bottom-6 h-10 sm:h-16 bg-white/10 blur-2xl rounded-full scale-50 group-hover:scale-100 transition-transform duration-1000"></div>
-            <img src={img} alt={`Instrument ${i+1}`} class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]" loading="lazy" />
-          </div>
-        ))}
+      <div
+        class="flex overflow-x-auto pb-10 sm:pb-16 px-4 sm:px-6 gap-8 sm:gap-16 snap-x snap-mandatory hide-scrollbar"
+      >
+        {
+          allInstruments.map((img, i) => (
+            <div
+              class="flex-none w-[200px] sm:w-[280px] h-[360px] sm:h-[520px] snap-center flex items-center justify-center relative group"
+              data-lightbox-src={allOriginals[i]}
+            >
+              <div class="absolute inset-x-4 sm:inset-x-6 bottom-4 sm:bottom-6 h-10 sm:h-16 bg-white/10 blur-2xl rounded-full scale-50 group-hover:scale-100 transition-transform duration-1000" />
+              <img
+                src={img}
+                alt={`Instrument ${i + 1}`}
+                class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
       </div>
       <Lightbox theme="dark" />
     </section>
+    {/* === IMPRESSIONEN === */}
+    <section class="py-12 sm:py-20 bg-white overflow-hidden relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12 reveal">
+        <div class="mb-2 flex items-center gap-3 sm:gap-4">
+          <div class="h-[2px] w-6 bg-brand sm:w-8"></div>
+          <h3 class="font-heading text-xl text-panel sm:text-2xl">
+            {siteData.impressionen.title}
+          </h3>
+        </div>
+        <p class="text-sm font-light text-soft">
+          Veranstaltungen, Kunden & Presse
+        </p>
+      </div>
 
+      {/* Fade edges */}
+      <div
+        class="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"
+      >
+      </div>
+
+      <div
+        class="impressions-track flex gap-4 sm:gap-6 px-4 sm:px-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4"
+      >
+        {
+          allImpressions.map((item) => (
+            <div class="flex-none snap-center rounded-lg border border-line/50 bg-surface p-4 shadow-sm transition-shadow duration-300 hover:shadow-md sm:w-[320px] sm:p-6">
+              <span class="mb-3 inline-block rounded-full bg-brand/10 px-3 py-1 font-heading text-[10px] uppercase tracking-[0.15em] text-brand sm:mb-4">
+                {item.category}
+              </span>
+              {item.url ? (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block text-sm font-medium leading-relaxed text-panel transition-colors hover:text-brand"
+                >
+                  {item.text}
+                  <span class="mt-2 block font-heading text-xs uppercase tracking-wider text-brand sm:mt-3">
+                    Mehr erfahren &rarr;
+                  </span>
+                </a>
+              ) : (
+                <p class="text-sm font-medium leading-relaxed text-panel">
+                  {item.text}
+                </p>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </section>
     {/* === KONTAKT === */}
     <section id="kontakt" class="bg-white py-16 sm:py-32">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 reveal">
         <div class="mb-4 flex items-center justify-center gap-3 sm:gap-4">
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
-          <h2 class="font-heading text-3xl text-panel sm:text-4xl">{siteData.kontakt.title}</h2>
+          <h2 class="font-heading text-3xl text-panel sm:text-4xl">
+            {siteData.kontakt.title}
+          </h2>
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
         </div>
-        <p class="mx-auto mb-8 max-w-xl text-center text-base font-light text-muted sm:mb-12 sm:text-lg">{siteData.kontakt.intro}</p>
+        <p
+          class="mx-auto mb-8 max-w-xl text-center text-base font-light text-muted sm:mb-12 sm:text-lg"
+        >
+          {siteData.kontakt.intro}
+        </p>
         <ContactForm theme="cool" />
-        <p class="mt-8 text-center text-sm italic text-soft sm:mt-10">{siteData.kontakt.greeting}</p>
+        <p class="mt-8 text-center text-sm italic text-soft sm:mt-10">
+          {siteData.kontakt.greeting}
+        </p>
       </div>
     </section>
 
     <footer class="bg-panel py-12 sm:py-16">
-      <div class="max-w-7xl mx-auto flex flex-col items-center gap-8 px-4 font-heading text-[10px] tracking-[0.2em] text-cool-soft sm:flex-row sm:justify-between sm:gap-6 sm:px-6 sm:text-[11px]">
+      <div
+        class="max-w-7xl mx-auto flex flex-col items-center gap-8 px-4 font-heading text-[10px] tracking-[0.2em] text-cool-soft sm:flex-row sm:justify-between sm:gap-6 sm:px-6 sm:text-[11px]"
+      >
         <div class="flex flex-col items-center sm:items-start gap-3">
           <p>&copy; {new Date().getFullYear()} Dorothea Urbantat.</p>
           <div class="flex gap-4">
-            <a href="/impressum" class="transition-colors hover:text-brand">Impressum</a>
-            <a href="/datenschutz" class="transition-colors hover:text-brand">Datenschutzerklärung</a>
+            <a href="/impressum" class="transition-colors hover:text-brand"
+              >Impressum</a
+            >
+            <a href="/datenschutz" class="transition-colors hover:text-brand"
+              >Datenschutzerklärung</a
+            >
           </div>
         </div>
         <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-          <a href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, '')}`} class="transition-colors hover:text-brand">{siteData.impressum.kontakt.telefon}</a>
-          <a href={`mailto:${siteData.impressum.kontakt.email}`} class="transition-colors hover:text-brand">{siteData.impressum.kontakt.email}</a>
+          <a
+            href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, "")}`}
+            class="transition-colors hover:text-brand"
+            >{siteData.impressum.kontakt.telefon}</a
+          >
+          <a
+            href={`mailto:${siteData.impressum.kontakt.email}`}
+            class="transition-colors hover:text-brand"
+            >{siteData.impressum.kontakt.email}</a
+          >
         </div>
       </div>
     </footer>
@@ -232,52 +401,60 @@ const allImpressions = [
 <script>
   function initPage() {
     // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("active");
+        });
+      },
+      { threshold: 0.1 },
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
     // Mobile menu
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
     if (!btn || !menu) return;
 
-    btn.addEventListener('click', () => {
-      const isOpen = menu.classList.contains('opacity-100');
+    btn.addEventListener("click", () => {
+      const isOpen = menu.classList.contains("opacity-100");
       if (isOpen) {
-        menu.classList.remove('opacity-100');
-        menu.classList.add('opacity-0', 'pointer-events-none');
-        btn.classList.remove('menu-open');
-        document.body.style.overflow = '';
+        menu.classList.remove("opacity-100");
+        menu.classList.add("opacity-0", "pointer-events-none");
+        btn.classList.remove("menu-open");
+        document.body.style.overflow = "";
       } else {
-        menu.classList.remove('opacity-0', 'pointer-events-none');
-        menu.classList.add('opacity-100');
-        btn.classList.add('menu-open');
-        document.body.style.overflow = 'hidden';
+        menu.classList.remove("opacity-0", "pointer-events-none");
+        menu.classList.add("opacity-100");
+        btn.classList.add("menu-open");
+        document.body.style.overflow = "hidden";
       }
     });
 
     // Close menu when clicking a link
-    menu.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('opacity-100');
-        menu.classList.add('opacity-0', 'pointer-events-none');
-        btn.classList.remove('menu-open');
-        document.body.style.overflow = '';
+    menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("opacity-100");
+        menu.classList.add("opacity-0", "pointer-events-none");
+        btn.classList.remove("menu-open");
+        document.body.style.overflow = "";
       });
     });
 
     // Initial scroll for impressions track to snap the second item (index 1) to the center
-    const track = document.querySelector('.impressions-track');
+    const track = document.querySelector(".impressions-track");
     if (track && track.children.length > 1) {
       setTimeout(() => {
         const secondItem = track.children[1] as HTMLElement;
-        const offset = secondItem.offsetLeft - (track.clientWidth / 2) + (secondItem.offsetWidth / 2);
-        track.scrollTo({ left: offset > 0 ? offset : 0, behavior: 'smooth' });
+        const offset =
+          secondItem.offsetLeft -
+          track.clientWidth / 2 +
+          secondItem.offsetWidth / 2;
+        track.scrollTo({ left: offset > 0 ? offset : 0, behavior: "smooth" });
       }, 300); // Small delay to ensure layout is calculated
     }
   }
 
-  document.addEventListener('DOMContentLoaded', initPage);
-  document.addEventListener('astro:page-load', initPage);
+  document.addEventListener("DOMContentLoaded", initPage);
+  document.addEventListener("astro:page-load", initPage);
 </script>

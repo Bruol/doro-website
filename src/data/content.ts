@@ -93,7 +93,7 @@ export const siteData = {
         "/assets/images/alemannische-06-no-bg.webp"
       ],
       originals: [
-        "/assets/images/alemannische-01.webp",
+        "/assets/images/alemannische-01-no-bg.webp",
         "/assets/images/alemannische-02.webp",
         "/assets/images/alemannische-03.webp",
         "/assets/images/alemannische-04.webp",
