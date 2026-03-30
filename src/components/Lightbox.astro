@@ -1,86 +1,117 @@
 ---
-/**
+/*
  * Lightbox component for expandable instrument gallery.
  * Usage: wrap clickable images, each with data-lightbox-src attribute.
  * The lightbox JS is self-contained via a <script> tag.
  */
 interface Props {
-  theme?: 'light' | 'dark';
+  theme?: "light" | "dark";
 }
-const { theme = 'light' } = Astro.props;
-const overlayBg = theme === 'dark' ? 'bg-black/95' : 'bg-white/95';
-const closeBtnColor = theme === 'dark' ? 'text-white' : 'text-black';
+const { theme = "light" } = Astro.props;
+const overlayBg = theme === "dark" ? "bg-black/95" : "bg-white/95";
+const closeBtnColor = theme === "dark" ? "text-white" : "text-black";
 ---
 
-<div id="lightbox-overlay" class={`fixed inset-0 z-[9999] ${overlayBg} backdrop-blur-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500`}>
-  <button id="lightbox-close" class={`absolute top-6 right-6 ${closeBtnColor} font-heading text-3xl tracking-widest hover:opacity-60 transition-opacity cursor-pointer z-[10000]`} aria-label="Close">
+<div
+  id="lightbox-overlay"
+  class={`fixed inset-0 z-[9999] ${overlayBg} backdrop-blur-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500`}
+>
+  <button
+    id="lightbox-close"
+    class={`absolute top-6 right-6 ${closeBtnColor} font-heading text-3xl tracking-widest hover:opacity-60 transition-opacity cursor-pointer z-[10000]`}
+    aria-label="Close"
+  >
     &times;
   </button>
-  <button id="lightbox-prev" class={`absolute left-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`} aria-label="Previous">
+  <button
+    id="lightbox-prev"
+    class={`absolute left-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`}
+    aria-label="Previous"
+  >
     &#8249;
   </button>
-  <button id="lightbox-next" class={`absolute right-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`} aria-label="Next">
+  <button
+    id="lightbox-next"
+    class={`absolute right-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`}
+    aria-label="Next"
+  >
     &#8250;
   </button>
-  <img id="lightbox-img" src="" alt="Enlarged instrument" class="max-h-[90vh] max-w-[90vw] object-contain drop-shadow-2xl transition-transform duration-500 scale-95" />
+  <img
+    id="lightbox-img"
+    src=""
+    alt="Enlarged instrument"
+    class="max-h-[90vh] max-w-[90vw] object-contain drop-shadow-2xl transition-transform duration-500 scale-95"
+  />
 </div>
 
 <script>
   function initLightbox() {
-    const overlay = document.getElementById('lightbox-overlay')!;
-    const img = document.getElementById('lightbox-img') as HTMLImageElement;
-    const closeBtn = document.getElementById('lightbox-close')!;
-    const prevBtn = document.getElementById('lightbox-prev')!;
-    const nextBtn = document.getElementById('lightbox-next')!;
+    const overlay = document.getElementById("lightbox-overlay")!;
+    const img = document.getElementById("lightbox-img") as HTMLImageElement;
+    const closeBtn = document.getElementById("lightbox-close")!;
+    const prevBtn = document.getElementById("lightbox-prev")!;
+    const nextBtn = document.getElementById("lightbox-next")!;
 
-    const triggers = Array.from(document.querySelectorAll('[data-lightbox-src]'));
+    const triggers = Array.from(
+      document.querySelectorAll("[data-lightbox-src]"),
+    );
     let currentIndex = 0;
 
     function open(index: number) {
       currentIndex = index;
-      const src = triggers[currentIndex]?.getAttribute('data-lightbox-src') || '';
+      const src =
+        triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
       img.src = src;
-      overlay.classList.remove('opacity-0', 'pointer-events-none');
-      img.classList.remove('scale-95');
-      img.classList.add('scale-100');
-      document.body.style.overflow = 'hidden';
+      overlay.classList.remove("opacity-0", "pointer-events-none");
+      img.classList.remove("scale-95");
+      img.classList.add("scale-100");
+      document.body.style.overflow = "hidden";
     }
 
     function close() {
-      overlay.classList.add('opacity-0', 'pointer-events-none');
-      img.classList.add('scale-95');
-      img.classList.remove('scale-100');
-      document.body.style.overflow = '';
+      overlay.classList.add("opacity-0", "pointer-events-none");
+      img.classList.add("scale-95");
+      img.classList.remove("scale-100");
+      document.body.style.overflow = "";
     }
 
     function prev() {
       currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-      img.src = triggers[currentIndex]?.getAttribute('data-lightbox-src') || '';
+      img.src = triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
     }
 
     function next() {
       currentIndex = (currentIndex + 1) % triggers.length;
-      img.src = triggers[currentIndex]?.getAttribute('data-lightbox-src') || '';
+      img.src = triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
     }
 
     triggers.forEach((el, i) => {
-      (el as HTMLElement).style.cursor = 'zoom-in';
-      el.addEventListener('click', () => open(i));
+      (el as HTMLElement).style.cursor = "zoom-in";
+      el.addEventListener("click", () => open(i));
     });
 
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
-    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+    closeBtn.addEventListener("click", close);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
+    });
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      prev();
+    });
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      next();
+    });
 
-    document.addEventListener('keydown', (e) => {
-      if (overlay.classList.contains('pointer-events-none')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
+    document.addEventListener("keydown", (e) => {
+      if (overlay.classList.contains("pointer-events-none")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initLightbox);
-  document.addEventListener('astro:page-load', initLightbox);
+  document.addEventListener("DOMContentLoaded", initLightbox);
+  document.addEventListener("astro:page-load", initLightbox);
 </script>

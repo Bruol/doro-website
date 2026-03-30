@@ -6,13 +6,13 @@ const impressum = siteData.impressum;
 ---
 
 <Layout title="Impressum | Dorothea Urbantat">
-  <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#720505] selection:text-white">
+  <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#4a6b8a] selection:text-white">
 
     {/* === NAV === */}
     <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         <a href="/" class="font-heading text-sm sm:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-[#1a1a1a] flex items-center gap-4">
-          <span class="text-[#720505]">&larr;</span> DOROTHEA URBANTAT
+          <span class="text-[#4a6b8a]">&larr;</span> DOROTHEA URBANTAT
         </a>
       </div>
     </nav>
@@ -21,8 +21,8 @@ const impressum = siteData.impressum;
     <main class="pt-32 pb-20 max-w-3xl mx-auto px-4 sm:px-6 min-h-[80svh]">
       <div class="mb-12">
         <div class="flex items-center gap-3 sm:gap-4 mb-4">
-          <div class="w-8 sm:w-10 h-[3px] bg-[#720505]"></div>
-          <h1 class="font-heading text-3xl sm:text-4xl text-[#1a1a1a]">{impressum.title}</h1>
+          <div class="w-8 sm:w-10 h-[3px] bg-[#4a6b8a]"></div>
+          <h1 class="font-heading text-3xl sm:text-4xl text-[#27313E]">{impressum.title}</h1>
         </div>
         <p class="font-heading tracking-[0.2em] text-[#8c8273] uppercase text-xs">Angaben gemäß § 5 TMG</p>
       </div>
@@ -30,11 +30,11 @@ const impressum = siteData.impressum;
       <div class="space-y-12 text-[#4a4238] font-light leading-relaxed">
         
         <section>
-          <h2 class="font-heading text-lg text-[#1a1a1a] mb-4">Kontaktadressen</h2>
+          <h2 class="font-heading text-lg text-[#27313E] mb-4">Kontaktadressen</h2>
           <div class="grid sm:grid-cols-2 gap-8">
             {impressum.angaben.map(ort => (
               <div>
-                <p class="font-medium text-[#1a1a1a]">{ort.name}</p>
+                <p class="font-medium text-[#27313E]">{ort.name}</p>
                 <p class="text-sm text-[#8c8273] mb-2">{ort.title}</p>
                 <p class="whitespace-pre-line">{ort.address}</p>
               </div>
@@ -43,28 +43,28 @@ const impressum = siteData.impressum;
         </section>
 
         <section>
-          <h2 class="font-heading text-lg text-[#1a1a1a] mb-4">Kontakt</h2>
-          <p>Telefon: <a href={`tel:${impressum.kontakt.telefon}`} class="hover:text-[#720505] transition-colors">{impressum.kontakt.telefon}</a></p>
-          <p>E-Mail: <a href={`mailto:${impressum.kontakt.email}`} class="hover:text-[#720505] transition-colors">{impressum.kontakt.email}</a></p>
+          <h2 class="font-heading text-lg text-[#27313E] mb-4">Kontakt</h2>
+          <p>Telefon: <a href={`tel:${impressum.kontakt.telefon.replace(/\s/g, '')}`} class="hover:text-[#4a6b8a] transition-colors">{impressum.kontakt.telefon}</a></p>
+          <p>E-Mail: <a href={`mailto:${impressum.kontakt.email}`} class="hover:text-[#4a6b8a] transition-colors">{impressum.kontakt.email}</a></p>
         </section>
 
         <section>
-          <h2 class="font-heading text-lg text-[#1a1a1a] mb-4">Berufsbezeichnung und berufsrechtliche Regelungen</h2>
+          <h2 class="font-heading text-lg text-[#27313E] mb-4">Berufsbezeichnung und berufsrechtliche Regelungen</h2>
           <p>Berufsbezeichnung: {impressum.berufsbezeichnung}</p>
           <p>Zuständige Kammer: {impressum.kammer}</p>
           <p>Verliehen durch: {impressum.verliehen_durch}</p>
         </section>
         
         <section>
-          <h2 class="font-heading text-lg text-[#1a1a1a] mb-4">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
+          <h2 class="font-heading text-lg text-[#27313E] mb-4">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
           <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
         </section>
 
       </div>
     </main>
 
-    <footer class="py-12 sm:py-16 bg-[#1a1a1a] border-t border-[#e0d6c8]/10 mt-auto">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center font-heading text-[10px] sm:text-[11px] tracking-[0.2em] text-[#8c8273]">
+    <footer class="py-12 sm:py-16 bg-[#27313E] border-t border-[#e0d6c8]/10 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center font-heading text-[10px] sm:text-[11px] tracking-[0.2em] text-[#8c9bab]">
         <p>&copy; {new Date().getFullYear()} Dorothea Urbantat. All Rights Reserved.</p>
       </div>
     </footer>

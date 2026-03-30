@@ -124,7 +124,7 @@ export const siteData = {
   kontakt: {
     title: "Kontakt",
     intro: "Bei Fragen aller Art nutzen Sie das Kontaktformular oder wenden Sie sich telefonisch an Ihre Geigenbaumeisterin.",
-    greeting: "Mit herzlichen Grüßen, Dorothea van der Woerd"
+    greeting: "Mit herzlichen Grüßen, Dorothea Urbantat"
   },
   impressum: {
     title: "Impressum",
@@ -133,7 +133,7 @@ export const siteData = {
       { name: "Dorothea Urbantat", title: "Geigenbaumeisterin", address: "Gunzener Straße 5\n08258 Markneukirchen-Breitenfeld" }
     ],
     kontakt: {
-      telefon: "015735230786",
+      telefon: "01573 5230786",
       email: "info@geigenbau-meisterin.de"
     },
     berufsbezeichnung: "Instrumentenbauerin",

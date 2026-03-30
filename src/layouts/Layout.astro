@@ -16,7 +16,7 @@ interface Props {
 const { 
   title = "Dorothea Urbantat | Geigenbaumeisterin", 
   description = "Geigenbau-Meisterin Dorothea Urbantat - Van der Woerd. Neubau, Reparatur, Setup & Kurse in Wegscheid und Markneukirchen.",
-  themeColor = "#720505",
+  themeColor = "#4a6b8a",
   image = "/assets/images/01-about.webp"
 } = Astro.props;
 
@@ -82,14 +82,14 @@ const schema = {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
-  <body class="antialiased min-h-screen text-gray-900 bg-white selection:bg-[#720505] selection:text-white">
+  <body class="antialiased min-h-screen text-gray-900 bg-white selection:bg-[#4a6b8a] selection:text-white">
     <slot />
   </body>
 </html>
 
 <style is:global>
   :root {
-    --color-primary: #720505;
+    --color-primary: #4a6b8a;
     --color-header: #27313E;
     --color-gray: #959595;
     --color-dark-gray: #3c3c3c;
