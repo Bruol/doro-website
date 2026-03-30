@@ -11,22 +11,17 @@ const nav = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
-const allInstruments = [
-  ...siteData.instrumente.alemannische.images,
-  ...siteData.instrumente.italienische.images,
-];
-const allOriginals = [
-  ...siteData.instrumente.alemannische.originals,
-  ...siteData.instrumente.italienische.originals,
-];
-
-const allImpressions = [
-  ...siteData.impressionen.veranstaltungen.map((v) => ({
-    ...v,
-    category: "Veranstaltung",
+const allInstrumentItems = [
+  ...siteData.instrumente.alemannische.images.map((image, index) => ({
+    image,
+    original: siteData.instrumente.alemannische.originals[index],
+    scale: siteData.instrumente.alemannische.scales[index] ?? 1,
   })),
-  ...siteData.impressionen.kunden.map((k) => ({ ...k, category: "Kunde" })),
-  ...siteData.impressionen.presse.map((p) => ({ ...p, category: "Presse" })),
+  ...siteData.instrumente.italienische.images.map((image, index) => ({
+    image,
+    original: siteData.instrumente.italienische.originals[index],
+    scale: siteData.instrumente.italienische.scales[index] ?? 1,
+  })),
 ];
 ---
 
@@ -124,19 +119,45 @@ const allImpressions = [
               {siteData.impressum.kontakt.email}
             </a>
             <div
-              class="reveal flex items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel sm:text-xl lg:justify-start"
+              class="reveal flex flex-col items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel sm:text-xl lg:items-start lg:justify-start"
               style="transition-delay:150ms"
             >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"
-                ><path
-                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                ></path></svg
+              <div
+                class="flex items-center justify-center gap-3 lg:justify-start"
               >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"
+                  ><path
+                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  ></path></svg
+                >
+                <a
+                  href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, "")}`}
+                  class="transition-colors hover:text-brand"
+                  >{siteData.impressum.kontakt.telefon}</a
+                >
+              </div>
               <a
-                href={`tel:${siteData.impressum.kontakt.telefon.replace(/\s/g, "")}`}
-                class="transition-colors hover:text-brand"
-                >{siteData.impressum.kontakt.telefon}</a
+                href={siteData.impressum.kontakt.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-3 transition-colors hover:text-brand"
               >
+                <svg
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.5" cy="6.5" r="1"></circle>
+                </svg>
+                <span>{siteData.impressum.kontakt.instagramHandle}</span>
+              </a>
             </div>
           </div>
           {/* Right side - Violin image */}
@@ -254,33 +275,38 @@ const allImpressions = [
     {/* === INSTRUMENTE === */}
     <section
       id="instrumente"
-      class="overflow-hidden bg-panel py-16 text-white sm:py-32"
+      class="overflow-hidden bg-panel py-16 text-white sm:py-24"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 sm:mb-16 reveal">
-        <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-          <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
-          <h2 class="font-heading text-3xl sm:text-4xl">Meisterinstrumente</h2>
+      <div class="mx-auto">
+        <div class="mb-10 sm:mb-16 reveal px-4 sm:px-6">
+          <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
+            <h2 class="font-heading text-3xl sm:text-4xl">
+              Meisterinstrumente
+            </h2>
+          </div>
+          <p
+            class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
+          >
+            Alemannische & Italienische Bauweise
+          </p>
         </div>
-        <p
-          class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
+        <div
+          class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar"
         >
-          Alemannische & Italienische Bauweise
-        </p>
-      </div>
-      <div
-        class="flex overflow-x-auto pb-10 sm:pb-16 px-4 sm:px-6 gap-8 sm:gap-16 snap-x snap-mandatory hide-scrollbar"
-      >
+        </div>
         {
-          allInstruments.map((img, i) => (
+          allInstrumentItems.map((item, i) => (
             <div
-              class="flex-none w-[200px] sm:w-[280px] h-[360px] sm:h-[520px] snap-center flex items-center justify-center relative group"
-              data-lightbox-src={allOriginals[i]}
+              class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
+              data-lightbox-src={item.original}
             >
-              <div class="absolute inset-x-4 sm:inset-x-6 bottom-4 sm:bottom-6 h-10 sm:h-16 bg-white/10 blur-2xl rounded-full scale-50 group-hover:scale-100 transition-transform duration-1000" />
+              <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
               <img
-                src={img}
+                src={item.image}
                 alt={`Instrument ${i + 1}`}
-                class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]"
+                class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+                style={`scale: ${item.scale};`}
                 loading="lazy"
               />
             </div>
@@ -289,59 +315,91 @@ const allImpressions = [
       </div>
       <Lightbox theme="dark" />
     </section>
-    {/* === IMPRESSIONEN === */}
-    <section class="py-12 sm:py-20 bg-white overflow-hidden relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12 reveal">
-        <div class="mb-2 flex items-center gap-3 sm:gap-4">
-          <div class="h-[2px] w-6 bg-brand sm:w-8"></div>
-          <h3 class="font-heading text-xl text-panel sm:text-2xl">
-            {siteData.impressionen.title}
-          </h3>
-        </div>
-        <p class="text-sm font-light text-soft">
-          Veranstaltungen, Kunden & Presse
-        </p>
-      </div>
-
-      {/* Fade edges */}
-      <div
-        class="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"
-      >
-      </div>
-      <div
-        class="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"
-      >
-      </div>
-
-      <div
-        class="impressions-track flex gap-4 sm:gap-6 px-4 sm:px-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4"
-      >
-        {
-          allImpressions.map((item) => (
-            <div class="flex-none snap-center rounded-lg border border-line/50 bg-surface p-4 shadow-sm transition-shadow duration-300 hover:shadow-md sm:w-[320px] sm:p-6">
-              <span class="mb-3 inline-block rounded-full bg-brand/10 px-3 py-1 font-heading text-[10px] uppercase tracking-[0.15em] text-brand sm:mb-4">
-                {item.category}
-              </span>
-              {item.url ? (
+    {/* === REFERENZ === */}
+    <section class="bg-white py-16 sm:py-24">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div
+          role="link"
+          tabindex="0"
+          onclick={`window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer')`}
+          onkeydown={`if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer'); }`}
+          class="reveal grid gap-8 rounded-[2rem] border border-line/70 bg-surface p-6 shadow-sm sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10 sm:p-10"
+        >
+          <div
+            class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-white"
+          >
+            <img
+              src={siteData.testimonial.image}
+              alt={siteData.testimonial.name}
+              class="aspect-square w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="max-w-3xl">
+            <span
+              class="mb-4 inline-block rounded-full bg-brand/10 px-4 py-1 font-heading text-[10px] uppercase tracking-[0.2em] text-brand sm:mb-6"
+            >
+              {siteData.testimonial.eyebrow}
+            </span>
+            <h3 class="font-heading text-3xl text-panel sm:text-4xl">
+              {siteData.testimonial.name}
+            </h3>
+            <div class="mt-3 flex items-center gap-2">
+              <p class="text-base font-light text-muted sm:text-lg">
+                {siteData.testimonial.role}
+              </p>
+              <div class="flex items-center text-panel">
                 <a
-                  href={item.url}
+                  href={siteData.testimonial.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="block text-sm font-medium leading-relaxed text-panel transition-colors hover:text-brand"
+                  onclick="event.stopPropagation()"
+                  aria-label={`${siteData.testimonial.name} Website`}
+                  class="inline-flex h-9 w-9 items-center justify-center transition-colors hover:text-brand"
                 >
-                  {item.text}
-                  <span class="mt-2 block font-heading text-xs uppercase tracking-wider text-brand sm:mt-3">
-                    Mehr erfahren &rarr;
-                  </span>
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M3 12h18"></path>
+                    <path d="M12 3a15 15 0 0 1 0 18"></path>
+                    <path d="M12 3a15 15 0 0 0 0 18"></path>
+                  </svg>
                 </a>
-              ) : (
-                <p class="text-sm font-medium leading-relaxed text-panel">
-                  {item.text}
-                </p>
-              )}
+                <a
+                  href={siteData.testimonial.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onclick="event.stopPropagation()"
+                  aria-label={`${siteData.testimonial.name} Instagram`}
+                  class="inline-flex h-9 w-9 items-center justify-center transition-colors hover:text-brand"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1"></circle>
+                  </svg>
+                </a>
+              </div>
             </div>
-          ))
-        }
+          </div>
+        </div>
       </div>
     </section>
     {/* === KONTAKT === */}
@@ -411,47 +469,32 @@ const allImpressions = [
     );
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-    // Mobile menu
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
-    if (!btn || !menu) return;
-
-    btn.addEventListener("click", () => {
-      const isOpen = menu.classList.contains("opacity-100");
-      if (isOpen) {
-        menu.classList.remove("opacity-100");
-        menu.classList.add("opacity-0", "pointer-events-none");
-        btn.classList.remove("menu-open");
-        document.body.style.overflow = "";
-      } else {
-        menu.classList.remove("opacity-0", "pointer-events-none");
-        menu.classList.add("opacity-100");
-        btn.classList.add("menu-open");
-        document.body.style.overflow = "hidden";
-      }
-    });
-
-    // Close menu when clicking a link
-    menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("opacity-100");
-        menu.classList.add("opacity-0", "pointer-events-none");
-        btn.classList.remove("menu-open");
-        document.body.style.overflow = "";
+    if (btn && menu) {
+      btn.addEventListener("click", () => {
+        const isOpen = menu.classList.contains("opacity-100");
+        if (isOpen) {
+          menu.classList.remove("opacity-100");
+          menu.classList.add("opacity-0", "pointer-events-none");
+          btn.classList.remove("menu-open");
+          document.body.style.overflow = "";
+        } else {
+          menu.classList.remove("opacity-0", "pointer-events-none");
+          menu.classList.add("opacity-100");
+          btn.classList.add("menu-open");
+          document.body.style.overflow = "hidden";
+        }
       });
-    });
 
-    // Initial scroll for impressions track to snap the second item (index 1) to the center
-    const track = document.querySelector(".impressions-track");
-    if (track && track.children.length > 1) {
-      setTimeout(() => {
-        const secondItem = track.children[1] as HTMLElement;
-        const offset =
-          secondItem.offsetLeft -
-          track.clientWidth / 2 +
-          secondItem.offsetWidth / 2;
-        track.scrollTo({ left: offset > 0 ? offset : 0, behavior: "smooth" });
-      }, 300); // Small delay to ensure layout is calculated
+      menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menu.classList.remove("opacity-100");
+          menu.classList.add("opacity-0", "pointer-events-none");
+          btn.classList.remove("menu-open");
+          document.body.style.overflow = "";
+        });
+      });
     }
   }
 

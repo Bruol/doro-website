@@ -18,26 +18,13 @@ export const siteData = {
       "Arbeitsschwerpunkte sind die Restaurierung von Saiteninstrumenten sowie der Bau von neuen Streichinstrumenten in Alemannischer und Italienischer Bauweise."
     ]
   },
-  impressionen: {
-    title: "Impressionen",
-    veranstaltungen: [
-      { text: "Ausstellung in Berlin 30.5.2020 bis 1.6.2020", url: null },
-      { text: "Gläserner Bauernhof 2020", url: null }
-    ],
-    kunden: [
-      { text: "Muriel Razavi Bratschistin", url: "https://www.murielrazavi.com/" },
-      { text: "Muriel Razavi playing Tenorviola", url: "https://ro-ro.facebook.com/YIMFE/photos/a.1907435022807872/2325728947645142/?type=3" },
-      { text: "Picuki Viola Performance", url: "https://www.picuki.com/media/2118006146924117798" },
-      { text: "Tenorgeige on Tour", url: "https://www.picuki.com/media/2244226374625739742" }
-    ],
-    presse: [
-      { text: "Freie Presse 16.12.2020", url: "https://www.freiepresse.de/vogtland/oberes-vogtland/geigenbaumeisterin-sichert-sich-filetstuecken-heimischer-fichte-artikel11252760" },
-      { text: "Musicon Valley 27.5.2019", url: "https://www.facebook.com/erlebnisweltmusikinstrumentenbau/photos/sch%C3%B6ner-bericht-%C3%BCber-dorothea-van-der-woerd-die-auch-unsere-g%C3%A4ste-mit-ihren-toll/2336203049756729/" },
-      { text: "Freie Presse 11.5.2019", url: "https://www.freiepresse.de/vogtland/oberes-vogtland/geschafft-geigen-sind-fertig-artikel10513627" },
-      { text: "Vogtland Anzeiger 8.5.2019", url: "https://www.vogtland-anzeiger.de/vogtland/klangfuelle-der-ur-instrumente-artikel10511273" },
-      { text: "April 2019", url: "https://www.picuki.com/media/2009650709678649407" },
-      { text: "Freie Presse 13.7.2017", url: "https://www.freiepresse.de/vogtland/oberes-vogtland/geigenbauerin-aus-dem-ruhrpott-schlaegt-im-vogtland-wurzeln-artikel9950562" }
-    ]
+  testimonial: {
+    eyebrow: "Referenz",
+    name: "Muriel Razavi",
+    role: "Bratschistin",
+    image: "/assets/images/murial_razavi.png",
+    websiteUrl: "https://www.murielrazavi.com/",
+    instagramUrl: "https://www.instagram.com/murielrazaviviola/",
   },
   leistungen: {
     title: "Leistungen",
@@ -92,6 +79,7 @@ export const siteData = {
         "/assets/images/alemannische-05-no-bg.webp",
         "/assets/images/alemannische-06-no-bg.webp"
       ],
+      scales: [1.4, 0.8, 0.8, 1, 1, 1],
       originals: [
         "/assets/images/alemannische-01-no-bg.webp",
         "/assets/images/alemannische-02.webp",
@@ -112,6 +100,7 @@ export const siteData = {
         "/assets/images/italienische-04-no-bg.webp",
         "/assets/images/italienische-05-no-bg.webp"
       ],
+      scales: [1, 1, 1, 0.8, 0.8],
       originals: [
         "/assets/images/italienische-01.webp",
         "/assets/images/italienische-02.webp",
@@ -134,7 +123,9 @@ export const siteData = {
     ],
     kontakt: {
       telefon: "01573 5230786",
-      email: "info@geigenbau-meisterin.de"
+      email: "info@geigenbau-meisterin.de",
+      instagramHandle: "@geigenbau_meisterin",
+      instagramUrl: "https://www.instagram.com/geigenbau_meisterin/"
     },
     berufsbezeichnung: "Instrumentenbauerin",
     kammer: "Handwerkskammer Passau",

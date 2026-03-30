@@ -10,6 +10,7 @@ interface Props {
 const { theme = "light" } = Astro.props;
 const overlayBg = theme === "dark" ? "bg-black/95" : "bg-white/95";
 const closeBtnColor = theme === "dark" ? "text-white" : "text-ink";
+const arrowBtnBg = theme === "dark" ? "bg-black/45" : "bg-black/55";
 ---
 
 <div
@@ -25,14 +26,14 @@ const closeBtnColor = theme === "dark" ? "text-white" : "text-ink";
   </button>
   <button
     id="lightbox-prev"
-    class={`absolute left-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`}
+    class={`absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full ${arrowBtnBg} ${closeBtnColor} font-heading text-4xl hover:opacity-85 transition-opacity cursor-pointer z-[10000]`}
     aria-label="Previous"
   >
     &#8249;
   </button>
   <button
     id="lightbox-next"
-    class={`absolute right-6 top-1/2 -translate-y-1/2 ${closeBtnColor} font-heading text-4xl hover:opacity-60 transition-opacity cursor-pointer z-[10000]`}
+    class={`absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full ${arrowBtnBg} ${closeBtnColor} font-heading text-4xl hover:opacity-85 transition-opacity cursor-pointer z-[10000]`}
     aria-label="Next"
   >
     &#8250;
