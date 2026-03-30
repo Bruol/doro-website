@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Datenschutzerklärung | Dorothea Urbantat">
-  <div class="bg-[#F9F6F1] min-h-screen font-body text-[#1a1a1a] selection:bg-[#4a6b8a] selection:text-white">
+  <div class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white">
 
     {/* === NAV === */}
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F6F1]/90 backdrop-blur-lg border-b border-[#e0d6c8]">
+    <nav class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        <a href="/" class="font-heading text-sm sm:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-[#1a1a1a] flex items-center gap-4">
-          <span class="text-[#4a6b8a]">&larr;</span> DOROTHEA URBANTAT
+        <a href="/" class="flex items-center gap-4 font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]">
+          <span class="text-brand">&larr;</span> DOROTHEA URBANTAT
         </a>
       </div>
     </nav>
@@ -17,27 +17,27 @@ import Layout from '../layouts/Layout.astro';
     {/* === CONTENT === */}
     <main class="pt-32 pb-20 max-w-3xl mx-auto px-4 sm:px-6 min-h-[80svh]">
       <div class="mb-12">
-        <div class="flex items-center gap-3 sm:gap-4 mb-4">
-          <div class="w-8 sm:w-10 h-[3px] bg-[#4a6b8a]"></div>
-          <h1 class="font-heading text-3xl sm:text-4xl text-[#27313E]">Datenschutzerklärung</h1>
+        <div class="mb-4 flex items-center gap-3 sm:gap-4">
+          <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
+          <h1 class="font-heading text-3xl text-panel sm:text-4xl">Datenschutzerklärung</h1>
         </div>
       </div>
 
-      <div class="space-y-12 text-[#4a4238] font-light leading-relaxed">
+      <div class="space-y-12 font-light leading-relaxed text-copy">
         
         <section>
-          <h2 class="font-heading text-lg text-[#27313E] mb-4">1. Datenschutz auf einen Blick</h2>
-          <h3 class="font-semibold text-[#27313E] mb-2">Allgemeine Hinweise</h3>
+          <h2 class="mb-4 font-heading text-lg text-panel">1. Datenschutz auf einen Blick</h2>
+          <h3 class="mb-2 font-semibold text-panel">Allgemeine Hinweise</h3>
           <p class="mb-4">Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
-          <h3 class="font-semibold text-[#27313E] mb-2">Datenerfassung auf dieser Website</h3>
+          <h3 class="mb-2 font-semibold text-panel">Datenerfassung auf dieser Website</h3>
           <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.</p>
         </section>
 
         <section>
-          <h2 class="font-heading text-lg text-[#27313E] mb-4">2. Allgemeine Hinweise und Pflichtinformationen</h2>
-          <h3 class="font-semibold text-[#27313E] mb-2">Datenschutz</h3>
+          <h2 class="mb-4 font-heading text-lg text-panel">2. Allgemeine Hinweise und Pflichtinformationen</h2>
+          <h3 class="mb-2 font-semibold text-panel">Datenschutz</h3>
           <p class="mb-4">Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-          <h3 class="font-semibold text-[#27313E] mb-2">Hinweis zur verantwortlichen Stelle</h3>
+          <h3 class="mb-2 font-semibold text-panel">Hinweis zur verantwortlichen Stelle</h3>
           <p class="mb-2">Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
           <p class="mb-2">
             Dorothea Urbantat<br/>
@@ -51,13 +51,13 @@ import Layout from '../layouts/Layout.astro';
         </section>
 
         <section>
-          <h2 class="font-heading text-lg text-[#27313E] mb-4">3. Datenerfassung auf dieser Website</h2>
-          <h3 class="font-semibold text-[#27313E] mb-2">Kontaktformular</h3>
+          <h2 class="mb-4 font-heading text-lg text-panel">3. Datenerfassung auf dieser Website</h2>
+          <h3 class="mb-2 font-semibold text-panel">Kontaktformular</h3>
           <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.</p>
           
-          <h3 class="font-semibold text-[#27313E] mt-6 mb-2">Server-Log-Dateien</h3>
+          <h3 class="mt-6 mb-2 font-semibold text-panel">Server-Log-Dateien</h3>
           <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Diese sind:</p>
-          <ul class="list-disc pl-5 mt-2 mb-4">
+          <ul class="mb-4 mt-2 list-disc pl-5">
             <li>Browsertyp und Browserversion</li>
             <li>Verwendetes Betriebssystem</li>
             <li>Referrer URL</li>
@@ -71,8 +71,8 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </main>
 
-    <footer class="py-12 sm:py-16 bg-[#27313E] border-t border-[#e0d6c8]/10 mt-auto">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center font-heading text-[10px] sm:text-[11px] tracking-[0.2em] text-[#8c9bab]">
+    <footer class="mt-auto border-t border-line/10 bg-panel py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto flex flex-col items-center px-4 text-center font-heading text-[10px] tracking-[0.2em] text-cool-soft sm:px-6 sm:text-[11px]">
         <p>&copy; {new Date().getFullYear()} Dorothea Urbantat. All Rights Reserved.</p>
       </div>
     </footer>

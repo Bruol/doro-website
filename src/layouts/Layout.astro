@@ -52,7 +52,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="de" class="scroll-smooth">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -82,37 +82,7 @@ const schema = {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
-  <body class="antialiased min-h-screen text-gray-900 bg-white selection:bg-[#4a6b8a] selection:text-white">
+  <body class="min-h-screen bg-white text-ink selection:bg-brand selection:text-white">
     <slot />
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --color-primary: #4a6b8a;
-    --color-header: #27313E;
-    --color-gray: #959595;
-    --color-dark-gray: #3c3c3c;
-    --color-border: #282828;
-  }
-  
-  /* Utilities for the custom fonts */
-  .font-heading {
-    font-family: 'Julius Sans One', sans-serif;
-  }
-  .font-body {
-    font-family: 'Josefin Sans', sans-serif;
-  }
-
-  /* Optional smooth reveal animation classes */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-  
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
