@@ -3,10 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "bun run dev:wrangler",
+    "dev:astro": "astro dev",
+    "dev:wrangler": "astro build --watch & wrangler dev --port 4321",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "smtp:test": "bun run scripts/test-smtp.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
