@@ -293,27 +293,21 @@ const allInstrumentItems = [
           </p>
           </div>
         </div>
-        <div
-          class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar"
-        >
-          {
-            allInstrumentItems.map((item, i) => (
-              <div
-                class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
-                data-lightbox-src={item.original}
-              >
-                <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
-                <img
-                  src={item.image}
-                  alt={`Instrument ${i + 1}`}
-                  class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-                  style={`scale: ${item.scale};`}
-                  loading="lazy"
-                />
-              </div>
-            ))
-          }
-        </div>
+        <div class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar">{allInstrumentItems.map((item, i) => (
+          <div
+            class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
+            data-lightbox-src={item.original}
+          >
+            <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90"></div>
+            <img
+              src={item.image}
+              alt={`Instrument ${i + 1}`}
+              class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+              style={`scale: ${item.scale};`}
+              loading="lazy"
+            />
+          </div>
+        ))}</div>
       </div>
       <Lightbox theme="dark" />
     </section>
