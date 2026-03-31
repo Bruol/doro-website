@@ -2,38 +2,72 @@
 import Layout from '../layouts/Layout.astro';
 import { siteData } from '../data/content';
 
+const legalNav = [
+  { href: '/', label: 'Startseite' },
+  { href: '/#about', label: 'Über mich' },
+  { href: '/#leistungen', label: 'Leistungen' },
+  { href: '/#instrumente', label: 'More' }
+];
+
 const impressum = siteData.impressum;
+
+const disclaimerSections = [
+  {
+    title: 'Haftung für Inhalte',
+    paragraphs: [
+      'Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.',
+      'Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.'
+    ]
+  },
+  {
+    title: 'Haftung für Links',
+    paragraphs: [
+      'Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.',
+      'Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.'
+    ]
+  },
+  {
+    title: 'Urheberrecht',
+    paragraphs: [
+      'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.',
+      'Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.'
+    ]
+  }
+];
 ---
 
 <Layout title="Impressum | Dorothea Urbantat">
   <div class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white">
-
-    {/* === NAV === */}
     <nav class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-4 font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]">
-          <span class="text-brand">&larr;</span> DOROTHEA URBANTAT
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
+        <a href="/" class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]">
+          DOROTHEA URBANTAT
         </a>
+        <div class="hidden gap-8 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex">
+          {legalNav.map((item) => (
+            <a href={item.href} class="transition-colors duration-300 hover:text-brand">
+              {item.label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
 
-    {/* === CONTENT === */}
-    <main class="pt-32 pb-20 max-w-3xl mx-auto px-4 sm:px-6 min-h-[80svh]">
+    <main class="mx-auto min-h-[80svh] max-w-4xl px-4 pt-32 pb-20 sm:px-6">
       <div class="mb-12">
         <div class="mb-4 flex items-center gap-3 sm:gap-4">
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
-          <h1 class="font-heading text-3xl text-panel sm:text-4xl">{impressum.title}</h1>
+          <h1 class="font-heading text-3xl text-panel sm:text-4xl">Impressum &amp; Datenschutz</h1>
         </div>
         <p class="font-heading text-xs uppercase tracking-[0.2em] text-soft">Angaben gemäß § 5 TMG</p>
       </div>
 
       <div class="space-y-12 font-light leading-relaxed text-copy">
-        
         <section>
-          <h2 class="mb-4 font-heading text-lg text-panel">Kontaktadressen</h2>
+          <h2 class="mb-4 font-heading text-lg text-panel">Anbieterkennzeichnung</h2>
           <div class="grid gap-8 sm:grid-cols-2">
-            {impressum.angaben.map(ort => (
-              <div>
+            {impressum.angaben.map((ort) => (
+              <div class="rounded-[1.5rem] border border-line/70 bg-white/70 p-6">
                 <p class="font-medium text-panel">{ort.name}</p>
                 <p class="mb-2 text-sm text-soft">{ort.title}</p>
                 <p class="whitespace-pre-line">{ort.address}</p>
@@ -44,27 +78,58 @@ const impressum = siteData.impressum;
 
         <section>
           <h2 class="mb-4 font-heading text-lg text-panel">Kontakt</h2>
-          <p>Telefon: <a href={`tel:${impressum.kontakt.telefon.replace(/\s/g, '')}`} class="transition-colors hover:text-brand">{impressum.kontakt.telefon}</a></p>
-          <p>E-Mail: <a href={`mailto:${impressum.kontakt.email}`} class="transition-colors hover:text-brand">{impressum.kontakt.email}</a></p>
+          <p>
+            Telefon:
+            <a href={`tel:${impressum.kontakt.telefon.replace(/\s/g, '')}`} class="ml-1 transition-colors hover:text-brand">
+              015735230786
+            </a>
+          </p>
+          <p>
+            E-Mail:
+            <a href={`mailto:${impressum.kontakt.email}`} class="ml-1 transition-colors hover:text-brand">
+              {impressum.kontakt.email}
+            </a>
+          </p>
+          <p>Berufsbezeichnung: Instrumentenbauerin</p>
+          <p>Zuständige Kammer: Handwerkskammer Passau</p>
+          <p>Verliehen durch: Handwerkskammer Chemnitz</p>
         </section>
 
         <section>
-          <h2 class="mb-4 font-heading text-lg text-panel">Berufsbezeichnung und berufsrechtliche Regelungen</h2>
-          <p>Berufsbezeichnung: {impressum.berufsbezeichnung}</p>
-          <p>Zuständige Kammer: {impressum.kammer}</p>
-          <p>Verliehen durch: {impressum.verliehen_durch}</p>
-        </section>
-        
-        <section>
-          <h2 class="mb-4 font-heading text-lg text-panel">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
-          <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+          <h2 class="mb-4 font-heading text-lg text-panel">Berufsrechtliche Regelungen</h2>
+          <p>Es gelten folgende berufsrechtliche Regelungen:</p>
+          <p>Regelungen einsehbar unter:</p>
+          <p>
+            Quelle:
+            <a
+              href="http://www.e-recht24.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="ml-1 transition-colors hover:text-brand"
+            >
+              http://www.e-recht24.de
+            </a>
+          </p>
         </section>
 
+        <section>
+          <h2 class="mb-4 font-heading text-lg text-panel">Haftungsausschluss (Disclaimer)</h2>
+          <div class="space-y-8">
+            {disclaimerSections.map((section) => (
+              <div>
+                <h3 class="mb-2 font-semibold text-panel">{section.title}</h3>
+                <div class="space-y-4">
+                  {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
 
     <footer class="mt-auto border-t border-line/10 bg-panel py-12 sm:py-16">
-      <div class="max-w-7xl mx-auto flex flex-col items-center px-4 text-center font-heading text-[10px] tracking-[0.2em] text-cool-soft sm:px-6 sm:text-[11px]">
+      <div class="mx-auto flex max-w-7xl flex-col items-center px-4 text-center font-heading text-[10px] tracking-[0.2em] text-cool-soft sm:px-6 sm:text-[11px]">
         <p>&copy; {new Date().getFullYear()} Dorothea Urbantat. All Rights Reserved.</p>
       </div>
     </footer>

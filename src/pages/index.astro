@@ -312,31 +312,30 @@ const allInstrumentItems = [
       <Lightbox theme="dark" />
     </section>
     {/* === REFERENZ === */}
-    <section class="bg-white py-16 sm:py-24">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <section class="bg-surface py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="reveal mb-10 flex items-center gap-3 sm:mb-12 sm:gap-4">
+          <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
+          <h2 class="font-heading text-3xl text-brand sm:text-4xl">
+            {siteData.testimonial.eyebrow}
+          </h2>
+        </div>
         <div
           role="link"
           tabindex="0"
           onclick={`window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer')`}
           onkeydown={`if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer'); }`}
-          class="reveal grid gap-8 rounded-[2rem] border border-line/70 bg-surface p-6 shadow-sm sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10 sm:p-10"
+          class="reveal grid gap-8 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10"
         >
-          <div
-            class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-white"
-          >
+          <div class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-surface">
             <img
               src={siteData.testimonial.image}
               alt={siteData.testimonial.name}
-              class="aspect-square w-full object-cover"
+              class="aspect-square w-full rounded-[1.5rem] object-cover"
               loading="lazy"
             />
           </div>
           <div class="max-w-3xl">
-            <span
-              class="mb-4 inline-block rounded-full bg-brand/10 px-4 py-1 font-heading text-[10px] uppercase tracking-[0.2em] text-brand sm:mb-6"
-            >
-              {siteData.testimonial.eyebrow}
-            </span>
             <h3 class="font-heading text-3xl text-panel sm:text-4xl">
               {siteData.testimonial.name}
             </h3>
