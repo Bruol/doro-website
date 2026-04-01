@@ -98,17 +98,18 @@ const allInstrumentItems = [
         {/* Mobile hamburger */}
         <button
           id="mobile-menu-btn"
-          class="-mr-2 flex cursor-pointer flex-col gap-[5px] p-2 md:hidden"
+          class="-mr-2 flex cursor-pointer flex-col gap-[5px] p-2 md:hidden group"
           aria-label="Menu"
+          data-menu-open="false"
         >
           <span
-            class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"
+            class="block h-[2px] w-5 origin-center bg-ink transition-all duration-300 group-data-[menu-open=true]:translate-y-[7px] group-data-[menu-open=true]:rotate-45"
           ></span>
           <span
-            class="hamburger-line block h-[2px] w-5 bg-ink transition-all duration-300"
+            class="block h-[2px] w-5 bg-ink transition-all duration-300 group-data-[menu-open=true]:opacity-0"
           ></span>
           <span
-            class="hamburger-line block h-[2px] w-5 origin-center bg-ink transition-all duration-300"
+            class="block h-[2px] w-5 origin-center bg-ink transition-all duration-300 group-data-[menu-open=true]:-translate-y-[7px] group-data-[menu-open=true]:-rotate-45"
           ></span>
         </button>
       </div>
@@ -124,8 +125,9 @@ const allInstrumentItems = [
         nav.map((l, i) => (
           <a
             href={l.href}
-            class="mobile-nav-link px-6 py-3 font-heading text-lg uppercase tracking-[0.2em] text-ink transition-colors hover:text-brand"
+            class="px-6 py-3 font-heading text-lg uppercase tracking-[0.2em] text-ink transition-colors hover:text-brand"
             style={`transition-delay: ${i * 50}ms`}
+            data-mobile-nav-link
           >
             {l.label}
           </a>
@@ -136,8 +138,9 @@ const allInstrumentItems = [
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
-        class="mobile-nav-link mt-4 inline-flex items-center justify-center p-1 text-ink transition-colors hover:text-brand"
+        class="mt-4 inline-flex items-center justify-center p-1 text-ink transition-colors hover:text-brand"
         style={`transition-delay: ${nav.length * 50}ms`}
+        data-mobile-nav-link
       >
         <svg
           class="h-5 w-5"
@@ -166,7 +169,8 @@ const allInstrumentItems = [
         >
           {/* Left side - Text content */}
           <div
-            class="pb-10 text-center lg:text-left reveal order-2 lg:order-1 overflow-hidden"
+            class="order-2 overflow-hidden pb-10 text-center opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 lg:order-1 lg:text-left"
+            data-reveal
           >
             <h1
               class="mb-4 pb-8 inline-grid gap-[0.01em] font-heading text-[3.5rem] uppercase text-brand min-[400px]:text-[3.8rem] sm:mb-6 sm:text-[4.6rem] lg:text-[5.4rem]"
@@ -186,14 +190,16 @@ const allInstrumentItems = [
             </h1>
             <a
               href={`mailto:${siteData.impressum.kontakt.email}`}
-              class="reveal mb-6 inline-block rounded bg-brand px-6 py-3 text-white transition-colors duration-300 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base"
+              class="mb-6 inline-block rounded bg-brand px-6 py-3 text-white opacity-0 translate-y-5 transition-all duration-300 ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base"
               style="transition-delay:100ms"
+              data-reveal
             >
               {siteData.impressum.kontakt.email}
             </a>
             <div
-              class="reveal flex flex-col items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel sm:text-xl lg:items-start lg:justify-start"
+              class="flex flex-col items-center justify-center gap-3 font-heading text-lg tracking-wider text-panel opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:text-xl lg:items-start lg:justify-start"
               style="transition-delay:150ms"
+              data-reveal
             >
               <div
                 class="group flex items-center justify-center gap-3 lg:justify-start"
@@ -238,8 +244,9 @@ const allInstrumentItems = [
           </div>
           {/* Right side - Hero visual */}
           <div
-            class="relative flex justify-center lg:justify-end reveal order-1 lg:order-2"
+            class="order-1 relative flex justify-center opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 lg:order-2 lg:justify-end"
             style="transition-delay:200ms"
+            data-reveal
           >
             {
               heroVariant === "image" ? (
@@ -251,11 +258,11 @@ const allInstrumentItems = [
                 />
               ) : (
                 <div
-                  class="hero-model-shell relative lg:ml-12 xl:ml-16"
+                  class="relative isolate aspect-[0.78] w-[min(84vw,42rem)] rounded-[2rem] bg-white [transform-origin:50%_50%] after:absolute after:inset-[auto_8%_4%] after:z-0 after:h-[12%] after:rounded-full after:bg-[radial-gradient(circle,rgba(39,49,62,0.2),rgba(39,49,62,0))] after:blur-[20px] after:content-[''] sm:w-[min(46vw,46rem)] lg:ml-12 xl:ml-16"
                   data-hero-model-shell
                 >
                   <model-viewer
-                    class="hero-model-viewer"
+                    class="relative z-[1] h-full w-full bg-transparent [--poster-color:transparent] [--progress-bar-color:transparent]"
                     src="/assets/alemannische-01.glb"
                     poster="/assets/images/alemannische-01-no-bg.png"
                     alt="Dreidimensionales Modell einer Violine"
@@ -289,14 +296,14 @@ const allInstrumentItems = [
         <div
           class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-start"
         >
-          <div class="flex justify-center lg:sticky lg:top-32 reveal">
+          <div class="flex justify-center opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 lg:sticky lg:top-32" data-reveal>
             <img
               src={siteData.about.portrait}
               alt="Dorothea Urbantat"
               class="h-[300px] sm:h-[500px] w-auto object-contain drop-shadow-xl"
             />
           </div>
-          <div class="reveal" style="transition-delay:100ms">
+          <div class="opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100" style="transition-delay:100ms" data-reveal>
             <div class="mb-6 h-[3px] w-10 bg-brand sm:mb-8"></div>
             <h2
               class="mb-8 font-heading text-3xl text-panel sm:mb-10 sm:text-4xl"
@@ -316,14 +323,15 @@ const allInstrumentItems = [
     {/* === LEISTUNGEN === */}
     <section id="leistungen" class="bg-white py-16 sm:py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="reveal mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
+        <div class="mb-3 flex items-center gap-3 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-4 sm:gap-4" data-reveal>
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
           <h2 class="font-heading text-3xl text-panel sm:text-4xl">
             Leistungen
           </h2>
         </div>
         <p
-          class="reveal mb-12 text-sm font-light text-soft sm:mb-24 sm:text-base"
+          class="mb-12 text-sm font-light text-soft opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-24 sm:text-base"
+          data-reveal
         >
           Vom Neubau bis zur Reparatur
         </p>
@@ -333,7 +341,7 @@ const allInstrumentItems = [
               const isSmall =
                 item.id === "neubau" || item.id === "leihinstrumente";
               return (
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 items-center reveal">
+                <div class="grid grid-cols-1 items-center gap-8 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:gap-12 lg:grid-cols-5" data-reveal>
                   <div
                     class={`lg:col-span-3 ${i % 2 === 1 ? "lg:order-2" : ""} order-2 lg:order-none`}
                   >
@@ -383,7 +391,7 @@ const allInstrumentItems = [
       class="overflow-hidden bg-panel py-16 text-white sm:py-24"
     >
       <div>
-        <div class="mb-10 sm:mb-16 reveal px-4 sm:px-6">
+        <div class="mb-10 px-4 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-16 sm:px-6" data-reveal>
           <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
@@ -400,15 +408,15 @@ const allInstrumentItems = [
         </div>
         <div class="overflow-hidden pb-10 sm:pb-16">
           <div
-            class="instrument-marquee hide-scrollbar"
+            class="relative overflow-x-auto overflow-y-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             data-instrument-loop
             aria-label="Instrumentengalerie"
           >
-            <div class="instrument-marquee-track" data-loop-track>
+            <div class="flex w-max gap-0" data-loop-track>
               {
                 [0, 1, 2].map((trackIndex) => (
                   <div
-                    class="instrument-marquee-segment"
+                    class="flex flex-none gap-12 pr-12 sm:gap-24 sm:pr-24"
                     data-loop-segment={trackIndex === 1 ? "primary" : undefined}
                     aria-hidden={trackIndex === 1 ? "false" : "true"}
                   >
@@ -440,7 +448,7 @@ const allInstrumentItems = [
     {/* === REFERENZ === */}
     <section class="bg-surface py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="reveal mb-10 flex items-center gap-3 sm:mb-12 sm:gap-4">
+        <div class="mb-10 flex items-center gap-3 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-12 sm:gap-4" data-reveal>
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
           <h2 class="font-heading text-3xl text-brand sm:text-4xl">
             {siteData.testimonial.eyebrow}
@@ -451,7 +459,8 @@ const allInstrumentItems = [
           tabindex="0"
           onclick={`window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer')`}
           onkeydown={`if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer'); }`}
-          class="reveal grid gap-8 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10"
+          class="grid gap-8 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10"
+          data-reveal
         >
           <div
             class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-surface"
@@ -527,7 +536,7 @@ const allInstrumentItems = [
     </section>
     {/* === KONTAKT === */}
     <section id="kontakt" class="bg-white py-16 sm:py-32">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 reveal">
+      <div class="mx-auto max-w-3xl px-4 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:px-6" data-reveal>
         <div class="mb-4 flex items-center justify-center gap-3 sm:gap-4">
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
           <h2 class="font-heading text-3xl text-panel sm:text-4xl">
@@ -639,7 +648,7 @@ const allInstrumentItems = [
         isPointerDown = true;
         startX = event.clientX;
         startScrollLeft = scroller.scrollLeft;
-        scroller.classList.add("is-dragging");
+        scroller.classList.add("cursor-grabbing", "select-none");
       });
 
       scroller.addEventListener("pointermove", (event) => {
@@ -649,7 +658,7 @@ const allInstrumentItems = [
 
       const stopDragging = () => {
         isPointerDown = false;
-        scroller.classList.remove("is-dragging");
+        scroller.classList.remove("cursor-grabbing", "select-none");
       };
 
       scroller.addEventListener("pointerup", stopDragging);
@@ -663,16 +672,17 @@ const allInstrumentItems = [
   }
 
   function initPage() {
-    // Scroll reveal
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("active");
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).dataset.revealed = "true";
+          }
         });
       },
       { threshold: 0.1 },
     );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
 
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
@@ -682,21 +692,21 @@ const allInstrumentItems = [
         if (isOpen) {
           menu.classList.remove("opacity-100");
           menu.classList.add("opacity-0", "pointer-events-none");
-          btn.classList.remove("menu-open");
+          btn.dataset.menuOpen = "false";
           document.body.style.overflow = "";
         } else {
           menu.classList.remove("opacity-0", "pointer-events-none");
           menu.classList.add("opacity-100");
-          btn.classList.add("menu-open");
+          btn.dataset.menuOpen = "true";
           document.body.style.overflow = "hidden";
         }
       });
 
-      menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      menu.querySelectorAll("[data-mobile-nav-link]").forEach((link) => {
         link.addEventListener("click", () => {
           menu.classList.remove("opacity-100");
           menu.classList.add("opacity-0", "pointer-events-none");
-          btn.classList.remove("menu-open");
+          btn.dataset.menuOpen = "false";
           document.body.style.overflow = "";
         });
       });
