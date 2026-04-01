@@ -34,6 +34,10 @@ const allInstrumentItems = [
   <div
     class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white"
   >
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"
+    ></script>
     {/* === NAV === */}
     <nav
       class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg"
@@ -226,18 +230,35 @@ const allInstrumentItems = [
               </a>
             </div>
           </div>
-          {/* Right side - Violin image */}
+          {/* Right side - 3D violin model */}
           <div
             class="relative flex justify-center lg:justify-end reveal order-1 lg:order-2"
             style="transition-delay:200ms"
           >
-            <div class="relative">
-              <img
-                src={"/assets/images/alemannische-01-no-bg.png"}
-                alt="Violine"
-                class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto bg-transparent object-contain lg:ml-12 xl:ml-16"
+            <div
+              class="hero-model-shell relative lg:ml-12 xl:ml-16"
+              data-hero-model-shell
+            >
+              <model-viewer
+                class="hero-model-viewer"
+                src="/assets/alemannische-01.glb"
+                poster="/assets/images/alemannische-01-no-bg.png"
+                alt="Dreidimensionales Modell einer Violine"
+                camera-controls
+                disable-zoom
+                interaction-prompt="none"
+                shadow-intensity="1"
+                shadow-softness="0.8"
+                exposure="1.1"
+                environment-image="neutral"
+                orientation="0deg -20deg 90deg"
+                camera-orbit="calc(70deg + env(window-scroll-y)*10 ) 90deg 90deg"
+                field-of-view="10deg"
+                interpolation-decay="120"
+                touch-action="pan-y"
                 loading="eager"
-              />
+                reveal="auto"
+                ar={false}></model-viewer>
             </div>
           </div>
         </div>
@@ -366,30 +387,32 @@ const allInstrumentItems = [
             aria-label="Instrumentengalerie"
           >
             <div class="instrument-marquee-track" data-loop-track>
-              {[0, 1, 2].map((trackIndex) => (
-                <div
-                  class="instrument-marquee-segment"
-                  data-loop-segment={trackIndex === 1 ? "primary" : undefined}
-                  aria-hidden={trackIndex === 1 ? "false" : "true"}
-                >
-                {allInstrumentItems.map((item, i) => (
+              {
+                [0, 1, 2].map((trackIndex) => (
                   <div
-                    class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] flex items-center justify-center relative group"
-                    data-lightbox-src={item.original}
-                    data-lightbox-index={i}
+                    class="instrument-marquee-segment"
+                    data-loop-segment={trackIndex === 1 ? "primary" : undefined}
+                    aria-hidden={trackIndex === 1 ? "false" : "true"}
                   >
-                    <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
-                    <img
-                      src={item.image}
-                      alt={`Instrument ${i + 1}`}
-                      class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-                      style={`scale: ${item.scale};`}
-                      loading="lazy"
-                    />
+                    {allInstrumentItems.map((item, i) => (
+                      <div
+                        class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] flex items-center justify-center relative group"
+                        data-lightbox-src={item.original}
+                        data-lightbox-index={i}
+                      >
+                        <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
+                        <img
+                          src={item.image}
+                          alt={`Instrument ${i + 1}`}
+                          class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+                          style={`scale: ${item.scale};`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
         </div>
