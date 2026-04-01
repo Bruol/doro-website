@@ -11,6 +11,11 @@ const nav = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
+const heroWords = {
+  geigenbau: "Geigenbau".split(""),
+  meisterin: "meisterin".split(""),
+};
+
 const allInstrumentItems = [
   ...siteData.instrumente.alemannische.images.map((image, index) => ({
     image,
@@ -41,20 +46,44 @@ const allInstrumentItems = [
           class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]"
           >DOROTHEA URBANTAT</a
         >
-        {/* Desktop nav */}
-        <div
-          class="hidden gap-10 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex"
-        >
-          {
-            nav.map((l) => (
-              <a
-                href={l.href}
-                class="transition-colors duration-300 hover:text-brand"
-              >
-                {l.label}
-              </a>
-            ))
-          }
+        <div class="flex items-center gap-3 sm:gap-4">
+          {/* Desktop nav */}
+          <div
+            class="hidden gap-10 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex"
+          >
+            {
+              nav.map((l) => (
+                <a
+                  href={l.href}
+                  class="transition-colors duration-300 hover:text-brand"
+                >
+                  {l.label}
+                </a>
+              ))
+            }
+          </div>
+          <a
+            href={siteData.impressum.kontakt.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="ml-20 hidden items-center justify-center p-1 text-ink transition-colors duration-300 hover:text-brand md:inline-flex"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+          </a>
         </div>
         {/* Mobile hamburger */}
         <button
@@ -92,6 +121,29 @@ const allInstrumentItems = [
           </a>
         ))
       }
+      <a
+        href={siteData.impressum.kontakt.instagramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        class="mobile-nav-link mt-4 inline-flex items-center justify-center p-1 text-ink transition-colors hover:text-brand"
+        style={`transition-delay: ${nav.length * 50}ms`}
+      >
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="1"></circle>
+        </svg>
+      </a>
     </div>
 
     {/* === HERO === */}
@@ -107,13 +159,24 @@ const allInstrumentItems = [
             class="text-center lg:text-left reveal order-2 lg:order-1 overflow-hidden"
           >
             <h1
-              class="mb-4 font-heading text-3xl uppercase tracking-[0.1em] text-brand min-[400px]:text-4xl sm:mb-6 sm:text-5xl lg:text-6xl"
+              class="mb-4 pb-8 inline-grid gap-[0.01em] font-heading text-[3.5rem] uppercase text-brand min-[400px]:text-[3.8rem] sm:mb-6 sm:text-[4.6rem] lg:text-[5.4rem]"
             >
-              Geigenbau meisterin
+              <span
+                class="mx-auto flex w-[10ch] h-[1.2em] justify-between lg:mx-0"
+                aria-label="Geigenbau"
+              >
+                {heroWords.geigenbau.map((char) => <span>{char}</span>)}
+              </span>
+              <span
+                class="mx-auto flex w-[10ch] h-[1.2em] justify-between lg:mx-0"
+                aria-label="Meisterin"
+              >
+                {heroWords.meisterin.map((char) => <span>{char}</span>)}
+              </span>
             </h1>
             <a
               href={`mailto:${siteData.impressum.kontakt.email}`}
-              class="reveal mb-6 inline-block bg-brand px-6 py-3 font-heading text-sm tracking-[0.1em] text-white transition-colors duration-300 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base"
+              class="reveal mb-6 inline-block rounded bg-brand px-6 py-3 text-white transition-colors duration-300 hover:bg-brand-deep sm:px-8 sm:py-4 sm:text-base"
               style="transition-delay:100ms"
             >
               {siteData.impressum.kontakt.email}
@@ -123,9 +186,12 @@ const allInstrumentItems = [
               style="transition-delay:150ms"
             >
               <div
-                class="flex items-center justify-center gap-3 lg:justify-start"
+                class="group flex items-center justify-center gap-3 lg:justify-start"
               >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"
+                <svg
+                  class="w-5 h-5 transition-colors group-hover:text-brand"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                   ><path
                     d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
                   ></path></svg
@@ -280,34 +346,40 @@ const allInstrumentItems = [
       <div>
         <div class="mb-10 sm:mb-16 reveal px-4 sm:px-6">
           <div class="max-w-7xl mx-auto">
-          <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
-            <h2 class="font-heading text-3xl sm:text-4xl">
-              Meisterinstrumente
-            </h2>
-          </div>
-          <p
-            class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
-          >
-            Alemannische & Italienische Bauweise
-          </p>
+            <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+              <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
+              <h2 class="font-heading text-3xl sm:text-4xl">
+                Meisterinstrumente
+              </h2>
+            </div>
+            <p
+              class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
+            >
+              Alemannische & Italienische Bauweise
+            </p>
           </div>
         </div>
-        <div class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar">{allInstrumentItems.map((item, i) => (
-          <div
-            class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
-            data-lightbox-src={item.original}
-          >
-            <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90"></div>
-            <img
-              src={item.image}
-              alt={`Instrument ${i + 1}`}
-              class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-              style={`scale: ${item.scale};`}
-              loading="lazy"
-            />
-          </div>
-        ))}</div>
+        <div
+          class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar"
+        >
+          {
+            allInstrumentItems.map((item, i) => (
+              <div
+                class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
+                data-lightbox-src={item.original}
+              >
+                <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
+                <img
+                  src={item.image}
+                  alt={`Instrument ${i + 1}`}
+                  class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+                  style={`scale: ${item.scale};`}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
       </div>
       <Lightbox theme="dark" />
     </section>
@@ -327,7 +399,9 @@ const allInstrumentItems = [
           onkeydown={`if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.open('${siteData.testimonial.websiteUrl}', '_blank', 'noopener,noreferrer'); }`}
           class="reveal grid gap-8 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center sm:gap-10"
         >
-          <div class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-surface">
+          <div
+            class="mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-surface"
+          >
             <img
               src={siteData.testimonial.image}
               alt={siteData.testimonial.name}

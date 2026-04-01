@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { siteData } from '../data/content';
 
 const legalNav = [
   { href: '/', label: 'Startseite' },
@@ -166,6 +167,7 @@ Deutschland
 Tel.: 015735230786
 E-Mail: info@geigenbau-meisterin.de
 Website: www.geigenbau-meisterin.de`;
+const instagramUrl = siteData.impressum.kontakt.instagramUrl;
 ---
 
 <Layout title="Datenschutzerklärung | Dorothea Urbantat">
@@ -175,12 +177,36 @@ Website: www.geigenbau-meisterin.de`;
         <a href="/" class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg sm:tracking-[0.25em]">
           DOROTHEA URBANTAT
         </a>
-        <div class="hidden gap-8 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex">
-          {legalNav.map((item) => (
-            <a href={item.href} class="transition-colors duration-300 hover:text-brand">
-              {item.label}
-            </a>
-          ))}
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="hidden gap-8 font-heading text-xs uppercase tracking-[0.2em] text-muted md:flex">
+            {legalNav.map((item) => (
+              <a href={item.href} class="transition-colors duration-300 hover:text-brand">
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="inline-flex items-center justify-center p-1 text-ink transition-colors duration-300 hover:text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+          </a>
         </div>
       </div>
     </nav>
