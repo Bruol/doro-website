@@ -1,0 +1,7 @@
+---
+import HomePage from "../components/HomePage.astro";
+
+const heroVariant = Astro.params.variant === "1" ? "image" : "model";
+---
+
+<HomePage heroVariant={heroVariant} />
