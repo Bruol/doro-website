@@ -9,8 +9,8 @@ export const siteData = {
   },
   about: {
     title: "Über mich",
-    portrait: "/assets/images/01-about-no-bg.webp",
-    portraitOriginal: "/assets/images/01-about.webp",
+    portrait: "/assets/images/01-about-no-bg.png",
+    portraitOriginal: "/assets/images/01-about.png",
     paragraphs: [
       "Von 2006 bis 2009 absolvierte ich die Ausbildung zur Geigenbau Gesellin an der Staatlichen Fachschule für Musikinstrumentenbau in Mittenwald.",
       "Wichtige Erfahrung sammelte ich darüber hinaus bei Hannes Jacobs in Johannesburg (Süd Afrika), bei Markus Wörz in München, bei Thomas Schmitt in Saarbrücken und bei Christoph Egenolf in Essen.",
@@ -32,7 +32,7 @@ export const siteData = {
       {
         id: "neubau",
         title: "Neubau",
-        image: "/assets/images/03-neubau-no-bg.webp",
+        image: "/assets/images/03-neubau-no-bg.png",
         description: "Ich kreiere Ihnen mit Ihrer Hilfe und Zusammenarbeit das Instrument Ihrer Wünsche. Zur Auswahl stehen klassische Modelle italienischer Bauweise sowie aufwändig verzierte Instrumente nordalpiner Geigenbaukunst. Durch persönliche Absprachen und regelmäßige Treffen während des Bauprozesses können Sie aktiv an der Klanggestaltung Ihres Instrumentes mitwirken."
       },
       {
@@ -61,7 +61,7 @@ export const siteData = {
       {
         id: "leihinstrumente",
         title: "Leihinstrumente",
-        image: "/assets/images/06-leihinstrumente-no-bg.webp",
+        image: "/assets/images/06-leihinstrumente-no-bg.png",
         description: "Leihen Sie bei mir ein Schülerinstrument für Ihr Kind und lassen Sie sich die Miete auf Ihr bei mir gefertigtes Meisterinstrument anrechnen. Ein Mietkauf lohnt sich, denn Klang bildet."
       }
     ]
@@ -72,14 +72,14 @@ export const siteData = {
       subtitle: "Instrumente in Alemannischer Bauweise (Model 1665)",
       models: ["Viola Alemannisches Model 1665", "Violine Alemannisches Model 1665"],
       images: [
-        "/assets/images/allemanische-01-no-bg.webp",
+        "/assets/images/alemannische-01-no-bg.png",
         "/assets/images/alemannische-02-no-bg.webp",
         "/assets/images/alemannische-03-no-bg.webp",
-        "/assets/images/alemannische-04-no-bg.webp",
+        "/assets/images/alemannische-04-no-bg.png",
         "/assets/images/alemannische-05-no-bg.webp",
-        "/assets/images/alemannische-06-no-bg.webp"
+        "/assets/images/alemannische-06-no-bg.png"
       ],
-      scales: [1.4, 0.8, 0.8, 1, 1, 1],
+      scales: [1, 0.8, 0.8, 1, 1, 1],
       originals: [
         "/assets/images/alemannische-01-no-bg.webp",
         "/assets/images/alemannische-02.webp",

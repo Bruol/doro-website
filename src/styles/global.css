@@ -49,6 +49,31 @@
 }
 
 @layer components {
+  .instrument-marquee {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .instrument-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0;
+  }
+
+  .instrument-marquee-segment {
+    display: flex;
+    flex: none;
+    gap: 3rem;
+    padding-right: 3rem;
+  }
+
+  .instrument-marquee.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -81,5 +106,12 @@
 
   .menu-open .hamburger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+@media (min-width: 640px) {
+  .instrument-marquee-segment {
+    gap: 6rem;
+    padding-right: 6rem;
   }
 }

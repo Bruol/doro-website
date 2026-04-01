@@ -359,26 +359,39 @@ const allInstrumentItems = [
             </p>
           </div>
         </div>
-        <div
-          class="flex overflow-x-auto overflow-y-hidden pb-10 sm:pb-16 gap-12 sm:gap-24 snap-x snap-mandatory hide-scrollbar"
-        >
-          {
-            allInstrumentItems.map((item, i) => (
-              <div
-                class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] snap-center flex items-center justify-center relative group"
-                data-lightbox-src={item.original}
-              >
-                <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
-                <img
-                  src={item.image}
-                  alt={`Instrument ${i + 1}`}
-                  class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
-                  style={`scale: ${item.scale};`}
-                  loading="lazy"
-                />
-              </div>
-            ))
-          }
+        <div class="overflow-hidden pb-10 sm:pb-16">
+          <div
+            class="instrument-marquee hide-scrollbar"
+            data-instrument-loop
+            aria-label="Instrumentengalerie"
+          >
+            <div class="instrument-marquee-track" data-loop-track>
+              {[0, 1, 2].map((trackIndex) => (
+                <div
+                  class="instrument-marquee-segment"
+                  data-loop-segment={trackIndex === 1 ? "primary" : undefined}
+                  aria-hidden={trackIndex === 1 ? "false" : "true"}
+                >
+                {allInstrumentItems.map((item, i) => (
+                  <div
+                    class="flex-none w-[200px] sm:w-[380px] h-[300px] sm:h-[700px] flex items-center justify-center relative group"
+                    data-lightbox-src={item.original}
+                    data-lightbox-index={i}
+                  >
+                    <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
+                    <img
+                      src={item.image}
+                      alt={`Instrument ${i + 1}`}
+                      class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+                      style={`scale: ${item.scale};`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <Lightbox theme="dark" />
@@ -526,6 +539,88 @@ const allInstrumentItems = [
 </Layout>
 
 <script>
+  function initInstrumentLoop() {
+    document.querySelectorAll("[data-instrument-loop]").forEach((node) => {
+      const scroller = node as HTMLElement;
+      if (scroller.dataset.loopReady === "true") return;
+
+      const primarySegment = scroller.querySelector(
+        '[data-loop-segment="primary"]',
+      ) as HTMLElement | null;
+
+      if (!primarySegment) return;
+
+      let segmentWidth = 0;
+
+      const normalizeScroll = () => {
+        if (!segmentWidth) return;
+
+        while (scroller.scrollLeft < segmentWidth * 0.5) {
+          scroller.scrollLeft += segmentWidth;
+        }
+
+        while (scroller.scrollLeft > segmentWidth * 1.5) {
+          scroller.scrollLeft -= segmentWidth;
+        }
+      };
+
+      const positionScroller = () => {
+        segmentWidth = primarySegment.getBoundingClientRect().width;
+        if (!segmentWidth) return;
+
+        if (scroller.dataset.loopPositioned !== "true") {
+          scroller.scrollLeft = segmentWidth;
+          scroller.dataset.loopPositioned = "true";
+          return;
+        }
+
+        normalizeScroll();
+      };
+
+      let frameId = 0;
+      scroller.addEventListener(
+        "scroll",
+        () => {
+          if (frameId) return;
+          frameId = window.requestAnimationFrame(() => {
+            frameId = 0;
+            normalizeScroll();
+          });
+        },
+        { passive: true },
+      );
+
+      let isPointerDown = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+
+      scroller.addEventListener("pointerdown", (event) => {
+        isPointerDown = true;
+        startX = event.clientX;
+        startScrollLeft = scroller.scrollLeft;
+        scroller.classList.add("is-dragging");
+      });
+
+      scroller.addEventListener("pointermove", (event) => {
+        if (!isPointerDown) return;
+        scroller.scrollLeft = startScrollLeft - (event.clientX - startX);
+      });
+
+      const stopDragging = () => {
+        isPointerDown = false;
+        scroller.classList.remove("is-dragging");
+      };
+
+      scroller.addEventListener("pointerup", stopDragging);
+      scroller.addEventListener("pointercancel", stopDragging);
+      scroller.addEventListener("pointerleave", stopDragging);
+
+      positionScroller();
+      window.addEventListener("resize", positionScroller, { passive: true });
+      scroller.dataset.loopReady = "true";
+    });
+  }
+
   function initPage() {
     // Scroll reveal
     const observer = new IntersectionObserver(
@@ -540,7 +635,7 @@ const allInstrumentItems = [
 
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
-    if (btn && menu) {
+    if (btn && menu && btn.dataset.menuReady !== "true") {
       btn.addEventListener("click", () => {
         const isOpen = menu.classList.contains("opacity-100");
         if (isOpen) {
@@ -564,7 +659,11 @@ const allInstrumentItems = [
           document.body.style.overflow = "";
         });
       });
+
+      btn.dataset.menuReady = "true";
     }
+
+    initInstrumentLoop();
   }
 
   document.addEventListener("DOMContentLoaded", initPage);

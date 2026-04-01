@@ -52,12 +52,21 @@ const arrowBtnBg = theme === "dark" ? "bg-black/45" : "bg-black/55";
     const triggers = Array.from(
       document.querySelectorAll("[data-lightbox-src]"),
     );
+    const uniqueSources = Array.from(
+      new Map(
+        triggers.map((trigger) => [
+          Number((trigger as HTMLElement).dataset.lightboxIndex ?? 0),
+          trigger.getAttribute("data-lightbox-src") || "",
+        ]),
+      ).entries(),
+    )
+      .sort((a, b) => a[0] - b[0])
+      .map(([, src]) => src);
     let currentIndex = 0;
 
     function open(index: number) {
       currentIndex = index;
-      const src =
-        triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
+      const src = uniqueSources[currentIndex] || "";
       img.src = src;
       overlay.classList.remove("opacity-0", "pointer-events-none");
       img.classList.remove("scale-95");
@@ -73,18 +82,21 @@ const arrowBtnBg = theme === "dark" ? "bg-black/45" : "bg-black/55";
     }
 
     function prev() {
-      currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-      img.src = triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
+      currentIndex =
+        (currentIndex - 1 + uniqueSources.length) % uniqueSources.length;
+      img.src = uniqueSources[currentIndex] || "";
     }
 
     function next() {
-      currentIndex = (currentIndex + 1) % triggers.length;
-      img.src = triggers[currentIndex]?.getAttribute("data-lightbox-src") || "";
+      currentIndex = (currentIndex + 1) % uniqueSources.length;
+      img.src = uniqueSources[currentIndex] || "";
     }
 
     triggers.forEach((el, i) => {
       (el as HTMLElement).style.cursor = "zoom-in";
-      el.addEventListener("click", () => open(i));
+      el.addEventListener("click", () =>
+        open(Number((el as HTMLElement).dataset.lightboxIndex ?? i)),
+      );
     });
 
     closeBtn.addEventListener("click", close);
