@@ -4,12 +4,6 @@ import Lightbox from "../components/Lightbox.astro";
 import ContactForm from "../components/ContactForm.astro";
 import { siteData } from "../data/content";
 
-interface Props {
-  heroVariant?: "image" | "model";
-}
-
-const { heroVariant = "model" } = Astro.props;
-
 const nav = [
   { href: "#about", label: "Über mich" },
   { href: "#leistungen", label: "Leistungen" },
@@ -40,10 +34,6 @@ const allInstrumentItems = [
   <div
     class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white"
   >
-    <script
-      type="module"
-      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"
-    ></script>
     {/* === NAV === */}
     <nav
       class="fixed top-0 left-0 z-50 w-full border-b border-line bg-surface/90 backdrop-blur-lg"
@@ -248,43 +238,12 @@ const allInstrumentItems = [
             style="transition-delay:200ms"
             data-reveal
           >
-            {
-              heroVariant === "image" ? (
-                <img
-                  src="/assets/images/alemannische-01-no-bg.png"
-                  alt="Violine"
-                  class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto bg-transparent object-contain lg:ml-12 xl:ml-16"
-                  loading="eager"
-                />
-              ) : (
-                <div
-                  class="relative isolate aspect-[0.78] w-[min(84vw,42rem)] rounded-[2rem] bg-white [transform-origin:50%_50%] after:absolute after:inset-[auto_8%_4%] after:z-0 after:h-[12%] after:rounded-full after:bg-[radial-gradient(circle,rgba(39,49,62,0.2),rgba(39,49,62,0))] after:blur-[20px] after:content-[''] sm:w-[min(46vw,46rem)] lg:ml-12 xl:ml-16"
-                  data-hero-model-shell
-                >
-                  <model-viewer
-                    class="relative z-[1] h-full w-full bg-transparent [--poster-color:transparent] [--progress-bar-color:transparent]"
-                    src="/assets/alemannische-01.glb"
-                    poster="/assets/images/alemannische-01-no-bg.png"
-                    alt="Dreidimensionales Modell einer Violine"
-                    camera-controls
-                    disable-zoom
-                    interaction-prompt="none"
-                    shadow-intensity="1"
-                    shadow-softness="0.8"
-                    exposure="1.1"
-                    environment-image="neutral"
-                    orientation="0deg -20deg 90deg"
-                    camera-orbit="calc(70deg + env(window-scroll-y)*10 ) 90deg 90deg"
-                    field-of-view="10deg"
-                    interpolation-decay="120"
-                    touch-action="pan-y"
-                    loading="eager"
-                    reveal="auto"
-                    ar={false}
-                  />{" "}
-                </div>
-              )
-            }
+            <img
+              src="/assets/images/alemannische-01-no-bg.png"
+              alt="Violine"
+              class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto bg-transparent object-contain lg:ml-12 xl:ml-16"
+              loading="eager"
+            />
           </div>
         </div>
       </div>

@@ -3,7 +3,19 @@
   "name": "doro-website",
   "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2025-02-22",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "routes": [
+    {
+      "pattern": "geigenbau-meisterin.de",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.geigenbau-meisterin.de",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"
