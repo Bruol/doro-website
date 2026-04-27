@@ -51,11 +51,11 @@ export const siteData = {
         id: "kurse",
         title: "Kurse & Workshops",
         image: "/assets/images/02-werkzeuge.webp",
-        description: "Hatten Sie jemals den Wunsch, auf einem von Ihnen selbst gebauten Instrument zu spielen? In meiner Werkstatt können Sie Ihren Traum verwirklichen. Zunächst werden wir den zeitlichen Rahmen Ihren Bedürfnissen anpassen und Sie können dann entscheiden, wie viel Sie an Ihrem persönlichen Instrument mitarbeiten wollen. Für gewöhnlich reichen zwei bis drei Wochen intensiver Arbeit aus. Unter meiner Anleitung werden dann, je nach Ihren handwerklichen Fähigkeiten, Fertigkeiten und Kenntnissen, mindestens die Hälfte der Arbeiten selbst ausgeführt. Die schwierigen Bauabschnitte übernehme ich gern für Sie. So können Sie anschließend Ihr ganz eigenes Instrument mit nach Hause nehmen und sich zusätzlich über die gewonnenen Erfahrungen freuen.",
+        description: "Hatten Sie jemals den Wunsch, auf einem von Ihnen selbst gebauten Instrument zu spielen? In meiner Werkstatt können Sie Ihren Traum verwirklichen. Zunächst werden wir den zeitlichen Rahmen Ihren Bedürfnissen anpassen und Sie können dann entscheiden, wie viel Sie an Ihrem persönlichen Instrument mitarbeiten wollen. Für gewöhnlich reichen drei bis vier Wochen intensiver Arbeit aus. Unter meiner Anleitung werden dann, je nach Ihren handwerklichen Fähigkeiten, Fertigkeiten und Kenntnissen, mindestens die Hälfte der Arbeiten selbst ausgeführt. Die schwierigen Bauabschnitte übernehme ich gern für Sie. So können Sie anschließend Ihr ganz eigenes Instrument mit nach Hause nehmen und sich zusätzlich über die gewonnenen Erfahrungen freuen.",
         preise: [
-          { label: "Violine", price: "2.500 € zzgl. Materialkosten" },
-          { label: "Viola", price: "2.900 € zzgl. Materialkosten" },
-          { label: "Violoncello", price: "5.000 € zzgl. Materialkosten" }
+          { label: "Violine", price: "4.300 € zzgl. Materialkosten" },
+          { label: "Viola", price: "4.700 € zzgl. Materialkosten" },
+          { label: "Violoncello", price: "7.000 € zzgl. Materialkosten" }
         ]
       },
       {
