@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "smtp:test": "bun run scripts/test-smtp.ts"
+    "smtp:test": "bun run scripts/test-smtp.ts",
+    "deploy": "bunx wrangler@latest deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",

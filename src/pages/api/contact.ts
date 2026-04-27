@@ -6,6 +6,14 @@ export const prerender = false;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+interface ContactRateLimiter {
+  limit(options: { key: string }): Promise<{ success: boolean }>;
+}
+
+type RuntimeEnv = Record<string, string | undefined> & {
+  CONTACT_RATE_LIMITER?: ContactRateLimiter;
+};
+
 function json(data: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -21,6 +29,12 @@ function redirectToStatus(request: Request, status: "success" | "error") {
   url.hash = "kontakt";
   url.searchParams.set("contact", status);
   return Response.redirect(url, 303);
+}
+
+function rateLimitResponse(request: Request, wantsJson: boolean) {
+  return wantsJson
+    ? json({ error: "Zu viele Anfragen. Bitte versuchen Sie es später erneut." }, 429)
+    : redirectToStatus(request, "error");
 }
 
 function formatLines(lines: Array<[string, string | undefined]>) {
@@ -56,9 +70,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const runtime = (locals as {
     runtime?: {
-      env?: Record<string, string | undefined>;
+      env?: RuntimeEnv;
     };
   }).runtime;
+
+  const rateLimiter = runtime?.env?.CONTACT_RATE_LIMITER;
+  if (rateLimiter) {
+    const clientIp = request.headers.get("cf-connecting-ip");
+    const rateLimitKey = clientIp ? `contact:${clientIp}` : "contact:unknown";
+    const { success } = await rateLimiter.limit({ key: rateLimitKey });
+
+    if (!success) {
+      return rateLimitResponse(request, wantsJson);
+    }
+  }
 
   const smtpHost = runtime?.env?.SMTP_HOST;
   const smtpPort = Number(runtime?.env?.SMTP_PORT ?? "587");
