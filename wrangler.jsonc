@@ -19,5 +19,12 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "SMTP_HOST": "send.one.com",
+    "SMTP_PORT": "587",
+    "SMTP_USER": "no-reply@geigenbau-meisterin.de",
+    "CONTACT_TO_EMAIL": "info@geigenbau-meisterin.de",
+    "CONTACT_FROM_EMAIL": "no-reply@geigenbau-meisterin.de"
   }
 }

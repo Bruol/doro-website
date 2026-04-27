@@ -1,21 +1,10 @@
 import type { APIRoute } from "astro";
-import nodemailer from "nodemailer";
+import { sendMail, type SmtpConfig } from "../../lib/server/smtp";
 
 export const prerender = false;
 
-const CONTACT_TO_EMAIL = "lorin@urbantat.eu";
-const CONTACT_FROM_EMAIL = "no-reply@geigenbau-meisterin.de";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
 
 function json(data: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -32,6 +21,13 @@ function redirectToStatus(request: Request, status: "success" | "error") {
   url.hash = "kontakt";
   url.searchParams.set("contact", status);
   return Response.redirect(url, 303);
+}
+
+function formatLines(lines: Array<[string, string | undefined]>) {
+  return lines
+    .filter(([, value]) => value)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join("\n");
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
@@ -67,12 +63,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const smtpHost = runtime?.env?.SMTP_HOST;
   const smtpPort = Number(runtime?.env?.SMTP_PORT ?? "587");
   const smtpUser = runtime?.env?.SMTP_USER;
-  const smtpPass = runtime?.env?.SMTP_PASS;
-  const smtpSecure = runtime?.env?.SMTP_SECURE === "true";
-  const contactTo = runtime?.env?.CONTACT_TO_EMAIL ?? CONTACT_TO_EMAIL;
-  const contactFrom = runtime?.env?.CONTACT_FROM_EMAIL ?? CONTACT_FROM_EMAIL;
+  const smtpPass = runtime?.env?.SMTP_PASSWORD ?? runtime?.env?.SMTP_PASS;
+  const contactTo = runtime?.env?.CONTACT_TO_EMAIL;
+  const contactFrom = runtime?.env?.CONTACT_FROM_EMAIL;
 
-  if (!smtpHost || !smtpUser || !smtpPass || Number.isNaN(smtpPort)) {
+  if (
+    !smtpHost ||
+    !smtpUser ||
+    !smtpPass ||
+    !contactTo ||
+    !contactFrom ||
+    Number.isNaN(smtpPort)
+  ) {
     console.error("Missing SMTP configuration for contact form.");
     return wantsJson
       ? json({ error: "Die Kontaktfunktion ist gerade nicht verfügbar." }, 500)
@@ -80,39 +82,46 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   try {
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-    const safeNachricht = escapeHtml(nachricht).replace(/\n/g, "<br />");
-
-    const transporter = nodemailer.createTransport({
+    const config: SmtpConfig = {
       host: smtpHost,
       port: smtpPort,
-      secure: smtpSecure,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"Website Kontakt" <${contactFrom}>`,
+      username: smtpUser,
+      password: smtpPass,
+      from: contactFrom,
       to: contactTo,
+    };
+
+    await sendMail(config, {
       replyTo: email,
       subject: `Neue Kontaktanfrage von ${name}`,
-      text: [
-        `Name: ${name}`,
-        `E-Mail: ${email}`,
-        "",
-        "Nachricht:",
-        nachricht,
-      ].join("\n"),
-      html: `
-        <p><strong>Name:</strong> ${safeName}</p>
-        <p><strong>E-Mail:</strong> ${safeEmail}</p>
-        <p><strong>Nachricht:</strong></p>
-        <p>${safeNachricht}</p>
-      `,
+      text: formatLines([
+        ["Name", name],
+        ["E-Mail", email],
+        ["Nachricht", nachricht],
+      ]),
     });
+
+    try {
+      await sendMail(
+        { ...config, to: email },
+        {
+          subject: "Ihre Nachricht ist angekommen",
+          text: [
+            `Hallo ${name},`,
+            "",
+            "vielen Dank fuer Ihre Nachricht. Ich habe Ihre Anfrage erhalten und melde mich so bald wie moeglich bei Ihnen.",
+            "",
+            "Ihre Nachricht:",
+            nachricht,
+            "",
+            "Viele Grüße,",
+            "Dorothea Urbantat",
+          ].join("\n"),
+        },
+      );
+    } catch (error) {
+      console.error("Failed to send confirmation email.", error);
+    }
 
     return wantsJson ? json({ ok: true }) : redirectToStatus(request, "success");
   } catch (error) {

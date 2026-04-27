@@ -11,6 +11,14 @@ export default defineConfig({
     inlineStylesheets: 'always'
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        external: ['cloudflare:sockets']
+      }
+    },
+    ssr: {
+      external: ['cloudflare:sockets']
+    }
   }
 });

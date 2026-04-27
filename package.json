@@ -16,9 +16,7 @@
     "@fontsource/josefin-sans": "^5.2.8",
     "@fontsource/julius-sans-one": "^5.2.7",
     "@tailwindcss/vite": "^4.2.0",
-    "@types/nodemailer": "^7.0.11",
     "astro": "^5.17.1",
-    "nodemailer": "^8.0.4",
     "tailwindcss": "^4.2.0",
     "wrangler": "^4.67.0"
   }
