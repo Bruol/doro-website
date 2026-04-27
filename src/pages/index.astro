@@ -1,5 +1,12 @@
 ---
 import HomePage from "../components/HomePage.astro";
+import { getLanguageFromRequest, getLocalizedSiteData } from "../data/content";
+
+const language = getLanguageFromRequest(Astro.request);
+
+if (language !== "de") {
+  return Astro.redirect(`/${language}/`);
+}
 ---
 
-<HomePage />
+<HomePage language="de" siteData={getLocalizedSiteData("de")} />

@@ -1,0 +1,70 @@
+import { instrumentImages, sharedData } from "./shared";
+
+export const enSiteData = {
+  ...sharedData,
+  languageName: "English",
+  title: "Dorothea Urbantat | Master Violin Maker",
+  description: "Master violin maker Dorothea Urbantat. New instruments, repairs, setup, courses and rentals in Wegscheid and Markneukirchen.",
+  header: { ...sharedData.header, subtitle: "Master Violin Maker" },
+  nav: { about: "About", services: "Services", instruments: "Instruments", contact: "Contact" },
+  hero: { ...sharedData.hero, words: ["Violin", "making"], imageAlt: "Violin" },
+  about: {
+    title: "About me",
+    portrait: "/assets/images/01-about-no-bg.png",
+    portraitOriginal: "/assets/images/01-about.png",
+    paragraphs: [
+      "From 2006 to 2009, I trained as a journeyman violin maker at the State Vocational School for Musical Instrument Making in Mittenwald.",
+      "I gained further valuable experience with Hannes Jacobs in Johannesburg, South Africa, with Markus Woerz in Munich, Thomas Schmitt in Saarbruecken and Christoph Egenolf in Essen.",
+      "In 2016, I passed the master craftsperson examination at the Chemnitz Chamber of Crafts.",
+      "My main areas of work are the restoration of string instruments and the making of new bowed instruments in Alemannic and Italian construction styles.",
+    ],
+  },
+  testimonial: { ...sharedData.testimonial, eyebrow: "Reference", role: "Violist" },
+  leistungen: {
+    title: "Services",
+    subtitle: "From new builds to repairs",
+    items: [
+      { id: "neubau", title: "New instruments", image: "/assets/images/03-neubau-no-bg.png", description: "Together with you, I create the instrument you have in mind. You can choose between classical models in the Italian tradition and elaborately ornamented instruments inspired by northern Alpine violin making. Through personal consultation and regular meetings during the building process, you can actively help shape the sound of your instrument." },
+      { id: "reparatur", title: "Repairs", image: "/assets/images/04-reparatur.webp", description: "Your favourite instruments are in good hands with me: from scratches to cracks, from a new bridge to a restored fingerboard, from worn playing marks to a carefully cleaned instrument, every detail is restored professionally." },
+      { id: "setup", title: "Personal setup", image: "/assets/images/05-setup-no-bg.webp", description: "I help you bring out the sound from your favourite instrument that you have always dreamed of." },
+      {
+        id: "kurse",
+        title: "Courses & workshops",
+        image: "/assets/images/02-werkzeuge.webp",
+        description: "Have you ever wished to play an instrument you built yourself? In my workshop, you can make that dream real. We first adapt the schedule to your needs, then you decide how much you would like to contribute to your own instrument. Usually, three to four weeks of intensive work are enough. Under my guidance, depending on your craft skills and experience, you will complete at least half of the work yourself. I am happy to take care of the more difficult building stages for you. Afterwards, you can take home your very own instrument, along with the experience you gained.",
+        preise: [
+          { label: "Violin", price: "4,300 EUR plus material costs" },
+          { label: "Viola", price: "4,700 EUR plus material costs" },
+          { label: "Cello", price: "7,000 EUR plus material costs" },
+        ],
+      },
+      { id: "leihinstrumente", title: "Rental instruments", image: "/assets/images/06-leihinstrumente-no-bg.png", description: "Rent a student instrument for your child from me and have the rental payments credited toward a master instrument made in my workshop. A rent-to-own arrangement is worthwhile, because sound shapes learning." },
+    ],
+  },
+  instrumente: {
+    title: "Master instruments",
+    subtitle: "Alemannic & Italian construction styles",
+    galleryLabel: "Instrument gallery",
+    imageAlt: "Instrument",
+    alemannische: { ...instrumentImages.alemannische, title: "Alemannic instruments", subtitle: "Instruments in Alemannic construction style (model 1665)", models: ["Alemannic model 1665 viola", "Alemannic model 1665 violin"] },
+    italienische: { ...instrumentImages.italienische, title: "Italian instruments", subtitle: "Instruments in Italian construction style", models: ["Italian model viola (Guadagnini model)", "Italian model violin (Stradivari model, Guadagnini model)"] },
+  },
+  kontakt: {
+    title: "Contact",
+    intro: "For questions of any kind, please use the contact form or contact your master violin maker by phone.",
+    greeting: "With warm regards, Dorothea Urbantat",
+  },
+  footer: { impressum: "Imprint", datenschutz: "Privacy policy" },
+  contactForm: {
+    name: "Name",
+    namePlaceholder: "Your name",
+    email: "Email",
+    emailPlaceholder: "your@email.com",
+    message: "Message",
+    messagePlaceholder: "Your message...",
+    submit: "Send message",
+    sending: "Message is being sent...",
+    success: "Thank you. Your message has been sent successfully.",
+    error: "Your message could not be sent right now.",
+  },
+};

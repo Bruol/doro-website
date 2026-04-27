@@ -5,8 +5,34 @@
  */
 interface Props {
   theme?: 'light' | 'dark' | 'warm' | 'cool';
+  labels?: {
+    name: string;
+    namePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    message: string;
+    messagePlaceholder: string;
+    submit: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
 }
-const { theme = 'light' } = Astro.props;
+const {
+  theme = 'light',
+  labels = {
+    name: "Name",
+    namePlaceholder: "Ihr Name",
+    email: "E-Mail",
+    emailPlaceholder: "ihre@email.de",
+    message: "Nachricht",
+    messagePlaceholder: "Ihre Nachricht...",
+    submit: "Nachricht senden",
+    sending: "Nachricht wird gesendet...",
+    success: "Vielen Dank. Ihre Nachricht wurde erfolgreich versendet.",
+    error: "Ihre Nachricht konnte gerade nicht gesendet werden.",
+  },
+} = Astro.props;
 
 const themes = {
   light: {
@@ -36,35 +62,35 @@ const t = themes[theme];
 
 <form class="w-full space-y-6" action="/api/contact" method="POST" data-contact-form>
   <div>
-    <label for="name" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>Name</label>
+    <label for="name" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>{labels.name}</label>
     <input 
       type="text" 
       id="name" 
       name="name" 
       required 
-      placeholder="Ihr Name"
+      placeholder={labels.namePlaceholder}
       class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 ${t.input}`}
     />
   </div>
   <div>
-    <label for="email" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>E-Mail</label>
+    <label for="email" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>{labels.email}</label>
     <input 
       type="email" 
       id="email" 
       name="email" 
       required 
-      placeholder="ihre@email.de"
+      placeholder={labels.emailPlaceholder}
       class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 ${t.input}`}
     />
   </div>
   <div>
-    <label for="nachricht" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>Nachricht</label>
+    <label for="nachricht" class={`block font-heading text-xs tracking-widest uppercase mb-3 ${t.label}`}>{labels.message}</label>
     <textarea 
       id="nachricht" 
       name="nachricht" 
       rows="5" 
       required 
-      placeholder="Ihre Nachricht..."
+      placeholder={labels.messagePlaceholder}
       class={`w-full px-5 py-4 border rounded-sm font-body text-base transition-all duration-300 outline-none focus:ring-4 resize-y ${t.input}`}
     ></textarea>
   </div>
@@ -78,11 +104,11 @@ const t = themes[theme];
     data-contact-submit
     class={`w-full font-heading tracking-[0.2em] text-sm uppercase px-8 py-5 rounded-sm transition-all duration-300 cursor-pointer ${t.button}`}
   >
-    Nachricht senden
+    {labels.submit}
   </button>
 </form>
 
-<script>
+<script define:vars={{ contactFormLabels: labels }}>
   function initContactForms() {
     document.querySelectorAll("[data-contact-form]").forEach((form) => {
       if (!(form instanceof HTMLFormElement) || form.dataset.enhanced === "true") {
@@ -103,7 +129,7 @@ const t = themes[theme];
 
         submitButton.disabled = true;
         status.classList.remove("hidden", "text-red-700", "text-green-700");
-        status.textContent = "Nachricht wird gesendet...";
+        status.textContent = contactFormLabels.sending;
 
         try {
           const response = await fetch(form.action, {
@@ -120,19 +146,19 @@ const t = themes[theme];
             throw new Error(
               typeof payload?.error === "string"
                 ? payload.error
-                : "Ihre Nachricht konnte gerade nicht gesendet werden.",
+                : contactFormLabels.error,
             );
           }
 
           form.reset();
           status.classList.add("text-green-700");
-          status.textContent = "Vielen Dank. Ihre Nachricht wurde erfolgreich versendet.";
+          status.textContent = contactFormLabels.success;
         } catch (error) {
           status.classList.add("text-red-700");
           status.textContent =
             error instanceof Error
               ? error.message
-              : "Ihre Nachricht konnte gerade nicht gesendet werden.";
+              : contactFormLabels.error;
         } finally {
           submitButton.disabled = false;
         }

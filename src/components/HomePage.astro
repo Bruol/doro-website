@@ -2,19 +2,31 @@
 import Layout from "../layouts/Layout.astro";
 import Lightbox from "../components/Lightbox.astro";
 import ContactForm from "../components/ContactForm.astro";
-import { siteData } from "../data/content";
+import { defaultLanguage, siteData as defaultSiteData, type Language, type SiteData } from "../data/content";
+
+interface Props {
+  language?: Language;
+  siteData?: SiteData;
+}
+
+const {
+  language = defaultLanguage,
+  siteData = defaultSiteData,
+} = Astro.props;
 
 const nav = [
-  { href: "#about", label: "Über mich" },
-  { href: "#leistungen", label: "Leistungen" },
-  { href: "#instrumente", label: "Instrumente" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "#about", label: siteData.nav.about },
+  { href: "#leistungen", label: siteData.nav.services },
+  { href: "#instrumente", label: siteData.nav.instruments },
+  { href: "#kontakt", label: siteData.nav.contact },
 ];
 
-const heroWords = {
-  geigenbau: "Geigenbau".split(""),
-  meisterin: "meisterin".split(""),
-};
+const heroWords = siteData.hero.words.map((word) => word.split(""));
+const languagePath = {
+  de: "/de/",
+  en: "/en/",
+  fr: "/fr/",
+} as const;
 
 const allInstrumentItems = [
   ...siteData.instrumente.alemannische.images.map((image, index) => ({
@@ -30,7 +42,7 @@ const allInstrumentItems = [
 ];
 ---
 
-<Layout title="Dorothea Urbantat | Geigenbaumeisterin">
+<Layout title={siteData.title} description={siteData.description} lang={language}>
   <div
     class="min-h-screen bg-surface font-body text-ink selection:bg-brand selection:text-white"
   >
@@ -84,6 +96,17 @@ const allInstrumentItems = [
               <circle cx="17.5" cy="6.5" r="1"></circle>
             </svg>
           </a>
+          <div class="hidden items-center gap-2 font-heading text-xs uppercase tracking-[0.16em] text-muted md:flex">
+            {(["de", "en", "fr"] as const).map((lang) => (
+              <a
+                href={languagePath[lang]}
+                class={`transition-colors hover:text-brand ${lang === language ? "text-brand" : ""}`}
+                aria-current={lang === language ? "page" : undefined}
+              >
+                {lang}
+              </a>
+            ))}
+          </div>
         </div>
         {/* Mobile hamburger */}
         <button
@@ -147,6 +170,18 @@ const allInstrumentItems = [
           <circle cx="17.5" cy="6.5" r="1"></circle>
         </svg>
       </a>
+      <div class="mt-2 flex items-center gap-4 font-heading text-xs uppercase tracking-[0.2em] text-muted">
+        {(["de", "en", "fr"] as const).map((lang) => (
+          <a
+            href={languagePath[lang]}
+            class={`transition-colors hover:text-brand ${lang === language ? "text-brand" : ""}`}
+            aria-current={lang === language ? "page" : undefined}
+            data-mobile-nav-link
+          >
+            {lang}
+          </a>
+        ))}
+      </div>
     </div>
 
     {/* === HERO === */}
@@ -167,15 +202,15 @@ const allInstrumentItems = [
             >
               <span
                 class="mx-auto flex w-[10ch] h-[1.2em] justify-between lg:mx-0"
-                aria-label="Geigenbau"
+                aria-label={siteData.hero.words[0]}
               >
-                {heroWords.geigenbau.map((char) => <span>{char}</span>)}
+                {heroWords[0].map((char) => <span>{char}</span>)}
               </span>
               <span
                 class="mx-auto flex w-[10ch] h-[1.2em] justify-between lg:mx-0"
-                aria-label="Meisterin"
+                aria-label={siteData.hero.words[1]}
               >
-                {heroWords.meisterin.map((char) => <span>{char}</span>)}
+                {heroWords[1].map((char) => <span>{char}</span>)}
               </span>
             </h1>
             <a
@@ -240,7 +275,7 @@ const allInstrumentItems = [
           >
             <img
               src="/assets/images/alemannische-01-no-bg.png"
-              alt="Violine"
+              alt={siteData.hero.imageAlt}
               class="h-[40vh] sm:h-[50vh] lg:h-[70vh] w-auto bg-transparent object-contain lg:ml-12 xl:ml-16"
               loading="eager"
             />
@@ -285,14 +320,14 @@ const allInstrumentItems = [
         <div class="mb-3 flex items-center gap-3 opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-4 sm:gap-4" data-reveal>
           <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
           <h2 class="font-heading text-3xl text-panel sm:text-4xl">
-            Leistungen
+            {siteData.leistungen.title}
           </h2>
         </div>
         <p
           class="mb-12 text-sm font-light text-soft opacity-0 translate-y-5 transition-[opacity,transform] duration-[800ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100 sm:mb-24 sm:text-base"
           data-reveal
         >
-          Vom Neubau bis zur Reparatur
+          {siteData.leistungen.subtitle}
         </p>
         <div class="space-y-16 sm:space-y-28">
           {
@@ -355,13 +390,13 @@ const allInstrumentItems = [
             <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div class="h-[3px] w-8 bg-brand sm:w-10"></div>
               <h2 class="font-heading text-3xl sm:text-4xl">
-                Meisterinstrumente
+                {siteData.instrumente.title}
               </h2>
             </div>
             <p
               class="font-heading text-[10px] uppercase tracking-[0.2em] text-cool-soft sm:text-xs sm:tracking-[0.3em]"
             >
-              Alemannische & Italienische Bauweise
+              {siteData.instrumente.subtitle}
             </p>
           </div>
         </div>
@@ -369,7 +404,7 @@ const allInstrumentItems = [
           <div
             class="relative overflow-x-auto overflow-y-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             data-instrument-loop
-            aria-label="Instrumentengalerie"
+            aria-label={siteData.instrumente.galleryLabel}
           >
             <div class="flex w-max gap-0" data-loop-track>
               {
@@ -388,7 +423,7 @@ const allInstrumentItems = [
                         <div class="absolute inset-x-10 bottom-5 h-6 rounded-full bg-black/20 blur-xl opacity-70 transition-all duration-500 group-hover:opacity-90" />
                         <img
                           src={item.image}
-                          alt={`Instrument ${i + 1}`}
+                          alt={`${siteData.instrumente.imageAlt} ${i + 1}`}
                           class="h-[90%] w-auto object-contain relative z-10 group-hover:-translate-y-4 transition-transform duration-700 drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
                           style={`scale: ${item.scale};`}
                           loading="lazy"
@@ -508,7 +543,7 @@ const allInstrumentItems = [
         >
           {siteData.kontakt.intro}
         </p>
-        <ContactForm theme="cool" />
+        <ContactForm theme="cool" labels={siteData.contactForm} />
         <p class="mt-8 text-center text-sm italic text-soft sm:mt-10">
           {siteData.kontakt.greeting}
         </p>
@@ -523,10 +558,10 @@ const allInstrumentItems = [
           <p>&copy; {new Date().getFullYear()} Dorothea Urbantat.</p>
           <div class="flex gap-4">
             <a href="/impressum" class="transition-colors hover:text-brand"
-              >Impressum</a
+              >{siteData.footer.impressum}</a
             >
             <a href="/datenschutz" class="transition-colors hover:text-brand"
-              >Datenschutzerklärung</a
+              >{siteData.footer.datenschutz}</a
             >
           </div>
         </div>

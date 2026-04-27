@@ -1,0 +1,70 @@
+import { instrumentImages, sharedData } from "./shared";
+
+export const frSiteData = {
+  ...sharedData,
+  languageName: "Français",
+  title: "Dorothea Urbantat | Maître luthière",
+  description: "Maître luthière Dorothea Urbantat. Création, réparation, réglage, stages et location d'instruments à Wegscheid et Markneukirchen.",
+  header: { ...sharedData.header, subtitle: "Maître luthière" },
+  nav: { about: "À propos", services: "Prestations", instruments: "Instruments", contact: "Contact" },
+  hero: { ...sharedData.hero, words: ["Lutherie", "violon"], imageAlt: "Violon" },
+  about: {
+    title: "À propos",
+    portrait: "/assets/images/01-about-no-bg.png",
+    portraitOriginal: "/assets/images/01-about.png",
+    paragraphs: [
+      "De 2006 à 2009, j'ai suivi une formation de luthière compagnonne à l'École nationale spécialisée dans la facture d'instruments de musique à Mittenwald.",
+      "J'ai ensuite acquis une expérience importante auprès de Hannes Jacobs à Johannesburg, en Afrique du Sud, de Markus Wörz à Munich, de Thomas Schmitt à Sarrebruck et de Christoph Egenolf à Essen.",
+      "En 2016, j'ai réussi l'examen de maîtrise à la Chambre des métiers de Chemnitz.",
+      "Mes domaines principaux sont la restauration d'instruments à cordes ainsi que la fabrication de nouveaux instruments du quatuor selon les traditions alémanique et italienne.",
+    ],
+  },
+  testimonial: { ...sharedData.testimonial, eyebrow: "Référence", role: "Altiste" },
+  leistungen: {
+    title: "Prestations",
+    subtitle: "De la création à la réparation",
+    items: [
+      { id: "neubau", title: "Création", image: "/assets/images/03-neubau-no-bg.png", description: "Avec votre aide et en dialogue avec vous, je crée l'instrument que vous imaginez. Vous pouvez choisir entre des modèles classiques de construction italienne et des instruments richement ornementés issus de l'art luthier nord-alpin. Des échanges personnels et des rencontres régulières pendant la fabrication vous permettent de participer activement à la conception sonore de votre instrument." },
+      { id: "reparatur", title: "Réparation", image: "/assets/images/04-reparatur.webp", description: "Vos instruments préférés sont entre de bonnes mains: de la rayure à la fente, du chevalet neuf à la touche restaurée, de la zone de jeu usée à l'instrument nettoyé avec soin, chaque intervention est réalisée professionnellement." },
+      { id: "setup", title: "Réglage personnalisé", image: "/assets/images/05-setup-no-bg.webp", description: "Je vous aide à faire naître de votre instrument le son dont vous avez toujours rêvé." },
+      {
+        id: "kurse",
+        title: "Stages & ateliers",
+        image: "/assets/images/02-werkzeuge.webp",
+        description: "Avez-vous déjà souhaité jouer sur un instrument construit par vous-même? Dans mon atelier, ce rêve peut devenir réalité. Nous adaptons d'abord le cadre temporel à vos besoins, puis vous décidez de la part de travail que vous souhaitez réaliser sur votre instrument personnel. En général, trois à quatre semaines de travail intensif suffisent. Sous ma direction, selon vos capacités manuelles, vos savoir-faire et vos connaissances, vous réalisez au moins la moitié des travaux vous-même. Je prends volontiers en charge les étapes les plus difficiles. Vous repartez ensuite avec votre propre instrument et avec l'expérience acquise.",
+        preise: [
+          { label: "Violon", price: "4 300 € hors matériaux" },
+          { label: "Alto", price: "4 700 € hors matériaux" },
+          { label: "Violoncelle", price: "7 000 € hors matériaux" },
+        ],
+      },
+      { id: "leihinstrumente", title: "Instruments de location", image: "/assets/images/06-leihinstrumente-no-bg.png", description: "Louez chez moi un instrument d'élève pour votre enfant et faites imputer le loyer sur un instrument de maître fabriqué dans mon atelier. Une location avec option d'achat vaut la peine, car le son forme l'oreille." },
+    ],
+  },
+  instrumente: {
+    title: "Instruments de maître",
+    subtitle: "Constructions alémanique & italienne",
+    galleryLabel: "Galerie d'instruments",
+    imageAlt: "Instrument",
+    alemannische: { ...instrumentImages.alemannische, title: "Instruments alémaniques", subtitle: "Instruments de construction alémanique (modèle 1665)", models: ["Alto modèle alémanique 1665", "Violon modèle alémanique 1665"] },
+    italienische: { ...instrumentImages.italienische, title: "Instruments italiens", subtitle: "Instruments de construction italienne", models: ["Alto modèle italien (modèle Guadagnini)", "Violon modèle italien (modèle Stradivari, modèle Guadagnini)"] },
+  },
+  kontakt: {
+    title: "Contact",
+    intro: "Pour toute question, utilisez le formulaire de contact ou contactez votre maître luthière par téléphone.",
+    greeting: "Avec mes salutations chaleureuses, Dorothea Urbantat",
+  },
+  footer: { impressum: "Mentions légales", datenschutz: "Politique de confidentialité" },
+  contactForm: {
+    name: "Nom",
+    namePlaceholder: "Votre nom",
+    email: "E-mail",
+    emailPlaceholder: "votre@email.fr",
+    message: "Message",
+    messagePlaceholder: "Votre message...",
+    submit: "Envoyer",
+    sending: "Message en cours d'envoi...",
+    success: "Merci. Votre message a bien été envoyé.",
+    error: "Votre message n'a pas pu être envoyé pour le moment.",
+  },
+};

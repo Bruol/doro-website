@@ -1,0 +1,100 @@
+import { instrumentImages, sharedData } from "./shared";
+
+export const deSiteData = {
+  ...sharedData,
+  languageName: "Deutsch",
+  title: "Dorothea Urbantat | Geigenbaumeisterin",
+  description: "Geigenbau-Meisterin Dorothea Urbantat - Van der Woerd. Neubau, Reparatur, Setup & Kurse in Wegscheid und Markneukirchen.",
+  header: { ...sharedData.header, subtitle: "Geigenbaumeisterin" },
+  nav: { about: "Über mich", services: "Leistungen", instruments: "Instrumente", contact: "Kontakt" },
+  hero: { ...sharedData.hero, words: ["Geigenbau", "meisterin"], imageAlt: "Violine" },
+  about: {
+    title: "Über mich",
+    portrait: "/assets/images/01-about-no-bg.png",
+    portraitOriginal: "/assets/images/01-about.png",
+    paragraphs: [
+      "Von 2006 bis 2009 absolvierte ich die Ausbildung zur Geigenbau Gesellin an der Staatlichen Fachschule für Musikinstrumentenbau in Mittenwald.",
+      "Wichtige Erfahrung sammelte ich darüber hinaus bei Hannes Jacobs in Johannesburg (Süd Afrika), bei Markus Wörz in München, bei Thomas Schmitt in Saarbrücken und bei Christoph Egenolf in Essen.",
+      "2016 habe ich die Meisterprüfung an der Handwerkskammer Chemnitz abgelegt.",
+      "Arbeitsschwerpunkte sind die Restaurierung von Saiteninstrumenten sowie der Bau von neuen Streichinstrumenten in Alemannischer und Italienischer Bauweise.",
+    ],
+  },
+  testimonial: { ...sharedData.testimonial, eyebrow: "Referenz", role: "Bratschistin" },
+  leistungen: {
+    title: "Leistungen",
+    subtitle: "Vom Neubau bis zur Reparatur",
+    items: [
+      {
+        id: "neubau",
+        title: "Neubau",
+        image: "/assets/images/03-neubau-no-bg.png",
+        description: "Ich kreiere Ihnen mit Ihrer Hilfe und Zusammenarbeit das Instrument Ihrer Wünsche. Zur Auswahl stehen klassische Modelle italienischer Bauweise sowie aufwändig verzierte Instrumente nordalpiner Geigenbaukunst. Durch persönliche Absprachen und regelmäßige Treffen während des Bauprozesses können Sie aktiv an der Klanggestaltung Ihres Instrumentes mitwirken.",
+      },
+      {
+        id: "reparatur",
+        title: "Reparatur",
+        image: "/assets/images/04-reparatur.webp",
+        description: "Ihre Lieblingsstücke sind bei mir in besten Händen: vom Kratzer bis zum Riss, vom neuen Steg bis zum restaurierten Griffbrett, von der abgenutzten Spielstelle zum gereinigten Instrument wird alles von mir professionell restauriert.",
+      },
+      {
+        id: "setup",
+        title: "Persönliches Setup",
+        image: "/assets/images/05-setup-no-bg.webp",
+        description: "Ich helfe Ihnen dabei, aus Ihren Lieblingsstücken den Klang hervor zu zaubern, von dem Sie schon immer geträumt haben.",
+      },
+      {
+        id: "kurse",
+        title: "Kurse & Workshops",
+        image: "/assets/images/02-werkzeuge.webp",
+        description: "Hatten Sie jemals den Wunsch, auf einem von Ihnen selbst gebauten Instrument zu spielen? In meiner Werkstatt können Sie Ihren Traum verwirklichen. Zunächst werden wir den zeitlichen Rahmen Ihren Bedürfnissen anpassen und Sie können dann entscheiden, wie viel Sie an Ihrem persönlichen Instrument mitarbeiten wollen. Für gewöhnlich reichen drei bis vier Wochen intensiver Arbeit aus. Unter meiner Anleitung werden dann, je nach Ihren handwerklichen Fähigkeiten, Fertigkeiten und Kenntnissen, mindestens die Hälfte der Arbeiten selbst ausgeführt. Die schwierigen Bauabschnitte übernehme ich gern für Sie. So können Sie anschließend Ihr ganz eigenes Instrument mit nach Hause nehmen und sich zusätzlich über die gewonnenen Erfahrungen freuen.",
+        preise: [
+          { label: "Violine", price: "4.300 € zzgl. Materialkosten" },
+          { label: "Viola", price: "4.700 € zzgl. Materialkosten" },
+          { label: "Violoncello", price: "7.000 € zzgl. Materialkosten" },
+        ],
+      },
+      {
+        id: "leihinstrumente",
+        title: "Leihinstrumente",
+        image: "/assets/images/06-leihinstrumente-no-bg.png",
+        description: "Leihen Sie bei mir ein Schülerinstrument für Ihr Kind und lassen Sie sich die Miete auf Ihr bei mir gefertigtes Meisterinstrument anrechnen. Ein Mietkauf lohnt sich, denn Klang bildet.",
+      },
+    ],
+  },
+  instrumente: {
+    title: "Meisterinstrumente",
+    subtitle: "Alemannische & Italienische Bauweise",
+    galleryLabel: "Instrumentengalerie",
+    imageAlt: "Instrument",
+    alemannische: {
+      ...instrumentImages.alemannische,
+      title: "Alemannische Instrumente",
+      subtitle: "Instrumente in Alemannischer Bauweise (Model 1665)",
+      models: ["Viola Alemannisches Model 1665", "Violine Alemannisches Model 1665"],
+    },
+    italienische: {
+      ...instrumentImages.italienische,
+      title: "Italienische Instrumente",
+      subtitle: "Instrumente in Italienischer Bauweise",
+      models: ["Viola Italienisches Model (Guadagnini Model)", "Violine Italienisches Model (Stradivari Model, Guadagnini Model)"],
+    },
+  },
+  kontakt: {
+    title: "Kontakt",
+    intro: "Bei Fragen aller Art nutzen Sie das Kontaktformular oder wenden Sie sich telefonisch an Ihre Geigenbaumeisterin.",
+    greeting: "Mit herzlichen Grüßen, Dorothea Urbantat",
+  },
+  footer: { impressum: "Impressum", datenschutz: "Datenschutzerklärung" },
+  contactForm: {
+    name: "Name",
+    namePlaceholder: "Ihr Name",
+    email: "E-Mail",
+    emailPlaceholder: "ihre@email.de",
+    message: "Nachricht",
+    messagePlaceholder: "Ihre Nachricht...",
+    submit: "Nachricht senden",
+    sending: "Nachricht wird gesendet...",
+    success: "Vielen Dank. Ihre Nachricht wurde erfolgreich versendet.",
+    error: "Ihre Nachricht konnte gerade nicht gesendet werden.",
+  },
+};

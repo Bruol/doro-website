@@ -6,13 +6,15 @@ interface Props {
   description?: string;
   themeColor?: string;
   image?: string;
+  lang?: string;
 }
 
 const { 
   title = "Dorothea Urbantat | Geigenbaumeisterin", 
   description = "Geigenbau-Meisterin Dorothea Urbantat - Van der Woerd. Neubau, Reparatur, Setup & Kurse in Wegscheid und Markneukirchen.",
   themeColor = "#4a6b8a",
-  image = "/assets/images/01-about.webp"
+  image = "/assets/images/01-about.webp",
+  lang = "de",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://geigenbau-meisterin.de");
@@ -47,7 +49,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,6 +78,14 @@ const schema = {
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script>
+      import { init } from "@plausible-analytics/tracker";
+
+      init({
+        domain: window.location.hostname,
+        endpoint: "https://plausible.bruol.me/api/event",
+      });
+    </script>
   </head>
   <body class="min-h-screen bg-white text-ink selection:bg-brand selection:text-white">
     <slot />

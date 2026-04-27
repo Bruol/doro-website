@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bun run dev:wrangler",
+    "dev": "bun run dev:astro",
     "dev:astro": "astro dev",
     "dev:wrangler": "astro build --watch & wrangler dev --port 4321",
     "build": "astro build",
@@ -16,6 +16,7 @@
     "@astrojs/cloudflare": "^12.6.12",
     "@fontsource/josefin-sans": "^5.2.8",
     "@fontsource/julius-sans-one": "^5.2.7",
+    "@plausible-analytics/tracker": "^0.4.4",
     "@tailwindcss/vite": "^4.2.0",
     "astro": "^5.17.1",
     "cloudflare-smtp": "^0.1.2",
