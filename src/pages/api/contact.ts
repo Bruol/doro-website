@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { sendMail, type SmtpConfig } from "../../lib/server/smtp";
+import { sendMail, type SmtpConfig } from "cloudflare-smtp";
 
 export const prerender = false;
 
@@ -114,6 +114,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
       password: smtpPass,
       from: contactFrom,
       to: contactTo,
+      heloName: "geigenbau-meisterin.de",
+      messageIdDomain: "geigenbau-meisterin.de",
     };
 
     await sendMail(config, {
