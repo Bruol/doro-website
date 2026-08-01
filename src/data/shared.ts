@@ -28,12 +28,12 @@ export const sharedData = {
 export const instrumentImages = {
   alemannische: {
     images: [
-      "/assets/images/alemannische-01-no-bg.png",
+      "/assets/images/alemannische-01-no-bg.webp",
       "/assets/images/alemannische-02-no-bg.webp",
       "/assets/images/alemannische-03-no-bg.webp",
-      "/assets/images/alemannische-04-no-bg.png",
+      "/assets/images/alemannische-04-no-bg.webp",
       "/assets/images/alemannische-05-no-bg.webp",
-      "/assets/images/alemannische-06-no-bg.png",
+      "/assets/images/alemannische-06-no-bg.webp",
     ],
     scales: [1, 0.8, 0.8, 1, 1, 1],
     originals: [

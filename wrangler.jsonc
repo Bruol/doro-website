@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "doro-website",
   "main": "./dist/_worker.js/index.js",
-  "compatibility_date": "2025-02-22",
+  "compatibility_date": "2026-08-01",
   "compatibility_flags": [
     "nodejs_compat"
   ],
@@ -19,6 +19,12 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "head_sampling_rate": 1
+    }
   },
   "ratelimits": [
     {

@@ -10,7 +10,7 @@ export const frSiteData = {
   hero: { ...sharedData.hero, words: ["Lutherie", "violon"], imageAlt: "Violon" },
   about: {
     title: "À propos",
-    portrait: "/assets/images/01-about-no-bg.png",
+    portrait: "/assets/images/01-about-no-bg.webp",
     portraitOriginal: "/assets/images/01-about.png",
     paragraphs: [
       "De 2006 à 2009, j'ai suivi une formation de luthière compagnonne à l'École nationale spécialisée dans la facture d'instruments de musique à Mittenwald.",
@@ -24,7 +24,7 @@ export const frSiteData = {
     title: "Prestations",
     subtitle: "De la création à la réparation",
     items: [
-      { id: "neubau", title: "Création", image: "/assets/images/03-neubau-no-bg.png", description: "Avec votre aide et en dialogue avec vous, je crée l'instrument que vous imaginez. Vous pouvez choisir entre des modèles classiques de construction italienne et des instruments richement ornementés issus de l'art luthier nord-alpin. Des échanges personnels et des rencontres régulières pendant la fabrication vous permettent de participer activement à la conception sonore de votre instrument." },
+      { id: "neubau", title: "Création", image: "/assets/images/03-neubau-no-bg.webp", description: "Avec votre aide et en dialogue avec vous, je crée l'instrument que vous imaginez. Vous pouvez choisir entre des modèles classiques de construction italienne et des instruments richement ornementés issus de l'art luthier nord-alpin. Des échanges personnels et des rencontres régulières pendant la fabrication vous permettent de participer activement à la conception sonore de votre instrument." },
       { id: "reparatur", title: "Réparation", image: "/assets/images/04-reparatur.webp", description: "Vos instruments préférés sont entre de bonnes mains: de la rayure à la fente, du chevalet neuf à la touche restaurée, de la zone de jeu usée à l'instrument nettoyé avec soin, chaque intervention est réalisée professionnellement." },
       { id: "setup", title: "Réglage personnalisé", image: "/assets/images/05-setup-no-bg.webp", description: "Je vous aide à faire naître de votre instrument le son dont vous avez toujours rêvé." },
       {
@@ -38,7 +38,7 @@ export const frSiteData = {
           { label: "Violoncelle", price: "7 000 € hors matériaux" },
         ],
       },
-      { id: "leihinstrumente", title: "Instruments de location", image: "/assets/images/06-leihinstrumente-no-bg.png", description: "Louez chez moi un instrument d'élève pour votre enfant et faites imputer le loyer sur un instrument de maître fabriqué dans mon atelier. Une location avec option d'achat vaut la peine, car le son forme l'oreille." },
+      { id: "leihinstrumente", title: "Instruments de location", image: "/assets/images/06-leihinstrumente-no-bg.webp", description: "Louez chez moi un instrument d'élève pour votre enfant et faites imputer le loyer sur un instrument de maître fabriqué dans mon atelier. Une location avec option d'achat vaut la peine, car le son forme l'oreille." },
     ],
   },
   instrumente: {

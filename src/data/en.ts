@@ -10,7 +10,7 @@ export const enSiteData = {
   hero: { ...sharedData.hero, words: ["Violin", "making"], imageAlt: "Violin" },
   about: {
     title: "About me",
-    portrait: "/assets/images/01-about-no-bg.png",
+    portrait: "/assets/images/01-about-no-bg.webp",
     portraitOriginal: "/assets/images/01-about.png",
     paragraphs: [
       "From 2006 to 2009, I trained as a journeyman violin maker at the State Vocational School for Musical Instrument Making in Mittenwald.",
@@ -24,7 +24,7 @@ export const enSiteData = {
     title: "Services",
     subtitle: "From new builds to repairs",
     items: [
-      { id: "neubau", title: "New instruments", image: "/assets/images/03-neubau-no-bg.png", description: "Together with you, I create the instrument you have in mind. You can choose between classical models in the Italian tradition and elaborately ornamented instruments inspired by northern Alpine violin making. Through personal consultation and regular meetings during the building process, you can actively help shape the sound of your instrument." },
+      { id: "neubau", title: "New instruments", image: "/assets/images/03-neubau-no-bg.webp", description: "Together with you, I create the instrument you have in mind. You can choose between classical models in the Italian tradition and elaborately ornamented instruments inspired by northern Alpine violin making. Through personal consultation and regular meetings during the building process, you can actively help shape the sound of your instrument." },
       { id: "reparatur", title: "Repairs", image: "/assets/images/04-reparatur.webp", description: "Your favourite instruments are in good hands with me: from scratches to cracks, from a new bridge to a restored fingerboard, from worn playing marks to a carefully cleaned instrument, every detail is restored professionally." },
       { id: "setup", title: "Personal setup", image: "/assets/images/05-setup-no-bg.webp", description: "I help you bring out the sound from your favourite instrument that you have always dreamed of." },
       {
@@ -38,7 +38,7 @@ export const enSiteData = {
           { label: "Cello", price: "7,000 EUR plus material costs" },
         ],
       },
-      { id: "leihinstrumente", title: "Rental instruments", image: "/assets/images/06-leihinstrumente-no-bg.png", description: "Rent a student instrument for your child from me and have the rental payments credited toward a master instrument made in my workshop. A rent-to-own arrangement is worthwhile, because sound shapes learning." },
+      { id: "leihinstrumente", title: "Rental instruments", image: "/assets/images/06-leihinstrumente-no-bg.webp", description: "Rent a student instrument for your child from me and have the rental payments credited toward a master instrument made in my workshop. A rent-to-own arrangement is worthwhile, because sound shapes learning." },
     ],
   },
   instrumente: {

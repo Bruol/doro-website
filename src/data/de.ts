@@ -3,14 +3,14 @@ import { instrumentImages, sharedData } from "./shared";
 export const deSiteData = {
   ...sharedData,
   languageName: "Deutsch",
-  title: "Dorothea Urbantat | Geigenbaumeisterin",
-  description: "Geigenbau-Meisterin Dorothea Urbantat - Van der Woerd. Neubau, Reparatur, Setup & Kurse in Wegscheid und Markneukirchen.",
+  title: "Geigenbauerin & Geigenbaumeisterin | Dorothea Urbantat",
+  description: "Geigenbauerin und Geigenbaumeisterin Dorothea Urbantat: Neubau, Reparatur, Setup, Leihinstrumente und Kurse in Wegscheid und Markneukirchen.",
   header: { ...sharedData.header, subtitle: "Geigenbaumeisterin" },
   nav: { about: "Über mich", services: "Leistungen", instruments: "Instrumente", contact: "Kontakt" },
   hero: { ...sharedData.hero, words: ["Geigenbau", "meisterin"], imageAlt: "Violine" },
   about: {
     title: "Über mich",
-    portrait: "/assets/images/01-about-no-bg.png",
+    portrait: "/assets/images/01-about-no-bg.webp",
     portraitOriginal: "/assets/images/01-about.png",
     paragraphs: [
       "Von 2006 bis 2009 absolvierte ich die Ausbildung zur Geigenbau Gesellin an der Staatlichen Fachschule für Musikinstrumentenbau in Mittenwald.",
@@ -27,7 +27,7 @@ export const deSiteData = {
       {
         id: "neubau",
         title: "Neubau",
-        image: "/assets/images/03-neubau-no-bg.png",
+        image: "/assets/images/03-neubau-no-bg.webp",
         description: "Ich kreiere Ihnen mit Ihrer Hilfe und Zusammenarbeit das Instrument Ihrer Wünsche. Zur Auswahl stehen klassische Modelle italienischer Bauweise sowie aufwändig verzierte Instrumente nordalpiner Geigenbaukunst. Durch persönliche Absprachen und regelmäßige Treffen während des Bauprozesses können Sie aktiv an der Klanggestaltung Ihres Instrumentes mitwirken.",
       },
       {
@@ -56,7 +56,7 @@ export const deSiteData = {
       {
         id: "leihinstrumente",
         title: "Leihinstrumente",
-        image: "/assets/images/06-leihinstrumente-no-bg.png",
+        image: "/assets/images/06-leihinstrumente-no-bg.webp",
         description: "Leihen Sie bei mir ein Schülerinstrument für Ihr Kind und lassen Sie sich die Miete auf Ihr bei mir gefertigtes Meisterinstrument anrechnen. Ein Mietkauf lohnt sich, denn Klang bildet.",
       },
     ],

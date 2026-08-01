@@ -7,6 +7,8 @@ interface Props {
   themeColor?: string;
   image?: string;
   lang?: string;
+  noindex?: boolean;
+  languageAlternates?: Partial<Record<"de" | "en" | "fr" | "x-default", string>>;
 }
 
 const { 
@@ -15,36 +17,62 @@ const {
   themeColor = "#4a6b8a",
   image = "/assets/images/01-about.webp",
   lang = "de",
+  noindex = false,
+  languageAlternates,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://geigenbau-meisterin.de");
+const siteURL = new URL(Astro.site || "https://geigenbau-meisterin.de");
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const imageURL = new URL(image, siteURL);
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Dorothea Urbantat Geigenbau",
-  "image": new URL(image, Astro.site || "https://geigenbau-meisterin.de").toString(),
-  "description": description,
-  "url": Astro.site || "https://geigenbau-meisterin.de",
-  "telephone": "015735230786",
-  "email": "info@geigenbau-meisterin.de",
-  "address": [
+  "@graph": [
     {
-      "@type": "PostalAddress",
-      "streetAddress": "Thalberg-Steindlbach 3",
-      "postalCode": "94110",
-      "addressLocality": "Wegscheid",
-      "addressCountry": "DE"
+      "@type": "Person",
+      "@id": "https://geigenbau-meisterin.de/#dorothea-urbantat",
+      "name": "Dorothea Urbantat",
+      "alternateName": "Dorothea Van der Woerd",
+      "jobTitle": "Geigenbaumeisterin",
+      "url": "https://geigenbau-meisterin.de/",
+      "sameAs": ["https://www.instagram.com/geigenbau_meisterin/"]
     },
     {
-      "@type": "PostalAddress",
-      "streetAddress": "Gunzener Straße 5",
-      "postalCode": "08258",
-      "addressLocality": "Markneukirchen-Breitenfeld",
-      "addressCountry": "DE"
+      "@type": "Organization",
+      "@id": "https://geigenbau-meisterin.de/#organization",
+      "name": "Dorothea Urbantat Geigenbau",
+      "url": "https://geigenbau-meisterin.de/",
+      "logo": imageURL.toString(),
+      "founder": { "@id": "https://geigenbau-meisterin.de/#dorothea-urbantat" },
+      "sameAs": ["https://www.instagram.com/geigenbau_meisterin/"]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://geigenbau-meisterin.de/#wegscheid",
+      "name": "Dorothea Urbantat Geigenbau – Wegscheid",
+      "image": imageURL.toString(),
+      "description": description,
+      "url": "https://geigenbau-meisterin.de/",
+      "telephone": "+4915735230786",
+      "email": "info@geigenbau-meisterin.de",
+      "parentOrganization": { "@id": "https://geigenbau-meisterin.de/#organization" },
+      "address": { "@type": "PostalAddress", "streetAddress": "Thalberg-Steindlbach 3", "postalCode": "94110", "addressLocality": "Wegscheid", "addressCountry": "DE" },
+      "priceRange": "€€€"
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://geigenbau-meisterin.de/#markneukirchen",
+      "name": "Dorothea Urbantat Geigenbau – Markneukirchen",
+      "image": imageURL.toString(),
+      "description": description,
+      "url": "https://geigenbau-meisterin.de/",
+      "telephone": "+4915735230786",
+      "email": "info@geigenbau-meisterin.de",
+      "parentOrganization": { "@id": "https://geigenbau-meisterin.de/#organization" },
+      "address": { "@type": "PostalAddress", "streetAddress": "Gunzener Straße 5", "postalCode": "08258", "addressLocality": "Markneukirchen-Breitenfeld", "addressCountry": "DE" },
+      "priceRange": "€€€"
     }
-  ],
-  "priceRange": "$$$"
+  ]
 };
 ---
 
@@ -54,11 +82,15 @@ const schema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <meta name="theme-color" content={themeColor} />
     <meta name="generator" content={Astro.generator} />
     
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
+    {languageAlternates && Object.entries(languageAlternates).map(([hrefLang, href]) => (
+      <link rel="alternate" hreflang={hrefLang} href={new URL(href, siteURL)} />
+    ))}
     
     <title>{title}</title>
 
@@ -67,14 +99,15 @@ const schema = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, canonicalURL)} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:locale" content={lang === "de" ? "de_DE" : lang === "fr" ? "fr_FR" : "en_GB"} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, canonicalURL)} />
+    <meta property="twitter:image" content={imageURL} />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,0 +1,79 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { deSiteData } from "../../data/de";
+
+const slugToId = {
+  neubau: "neubau",
+  reparatur: "reparatur",
+  setup: "setup",
+  "kurse-workshops": "kurse",
+  leihinstrumente: "leihinstrumente",
+} as const;
+
+type ServiceSlug = keyof typeof slugToId;
+const slug = Astro.params.slug as ServiceSlug;
+const serviceId = slugToId[slug];
+const service = deSiteData.leistungen.items.find((item) => item.id === serviceId);
+
+if (!service) {
+  return new Response("Not found", { status: 404 });
+}
+
+const titles: Record<ServiceSlug, string> = {
+  neubau: "Geigenbau & Neubau von Meisterinstrumenten | Dorothea Urbantat",
+  reparatur: "Geigenreparatur & Restauration | Dorothea Urbantat",
+  setup: "Geigen-Setup & Klangoptimierung | Dorothea Urbantat",
+  "kurse-workshops": "Geigenbaukurse & Workshops | Dorothea Urbantat",
+  leihinstrumente: "Leihinstrumente für Kinder | Dorothea Urbantat",
+};
+
+const descriptions: Record<ServiceSlug, string> = {
+  neubau: "Individueller Neubau von Violinen, Violen und Celli in italienischer und alemannischer Bauweise durch Geigenbaumeisterin Dorothea Urbantat.",
+  reparatur: "Professionelle Geigenreparatur und Restauration von Streichinstrumenten: Risse, Stege, Griffbretter, Reinigung und klangliche Optimierung.",
+  setup: "Persönliches Setup und Klangoptimierung für Violine, Viola und Cello bei Geigenbaumeisterin Dorothea Urbantat.",
+  "kurse-workshops": "In Geigenbaukursen und Workshops unter fachkundiger Anleitung ein eigenes Streichinstrument bauen – individuell geplant und begleitet.",
+  leihinstrumente: "Hochwertige Leihinstrumente für Kinder und Schüler mit Anrechnung der Miete auf ein später gefertigtes Meisterinstrument.",
+};
+
+const imageDimensions: Record<ServiceSlug, { width: number; height: number }> = {
+  neubau: { width: 245, height: 662 },
+  reparatur: { width: 315, height: 210 },
+  setup: { width: 315, height: 210 },
+  "kurse-workshops": { width: 315, height: 315 },
+  leihinstrumente: { width: 200, height: 438 },
+};
+---
+
+<Layout title={titles[slug]} description={descriptions[slug]} image={service.image} lang="de">
+  <div class="min-h-screen bg-surface font-body text-ink">
+    <nav class="border-b border-line bg-surface/95">
+      <div class="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <a href="/" class="font-heading text-sm tracking-[0.2em] text-ink sm:text-lg">DOROTHEA URBANTAT</a>
+        <a href="/#leistungen" class="font-heading text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-brand">Alle Leistungen</a>
+      </div>
+    </nav>
+    <main>
+      <section class="bg-white py-16 sm:py-24">
+        <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_360px]">
+          <div>
+            <p class="mb-4 font-heading text-xs uppercase tracking-[0.22em] text-brand">Geigenbaumeisterin · Wegscheid &amp; Markneukirchen</p>
+            <h1 class="font-heading text-4xl leading-tight text-panel sm:text-6xl">{service.title}</h1>
+            <p class="mt-8 text-lg font-light leading-relaxed text-copy sm:text-xl">{service.description}</p>
+          </div>
+          <img src={service.image} alt={`${service.title} bei Geigenbaumeisterin Dorothea Urbantat`} width={imageDimensions[slug].width} height={imageDimensions[slug].height} class="mx-auto max-h-[520px] w-auto object-contain" loading="eager" />
+        </div>
+      </section>
+      <section class="py-16 sm:py-20">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 class="font-heading text-3xl text-panel">Persönliche Beratung für Ihr Instrument</h2>
+          <p class="mt-6 text-lg font-light leading-relaxed text-copy">Jedes Instrument und jede Musikerin oder jeder Musiker bringt eigene Anforderungen mit. In einem persönlichen Gespräch klären wir Zustand, Ziel, Vorgehen und den passenden zeitlichen Rahmen transparent.</p>
+          {service.preise && <ul class="mt-8 space-y-3">{service.preise.map((entry) => <li class="flex justify-between border-b border-line pb-3"><span>{entry.label}</span><strong>{entry.price}</strong></li>)}</ul>}
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="/#kontakt" class="rounded bg-brand px-6 py-3 font-heading text-sm text-white transition-colors hover:bg-brand-deep">Kontakt aufnehmen</a>
+            <a href="tel:+4915735230786" class="rounded border border-brand px-6 py-3 font-heading text-sm text-brand transition-colors hover:bg-brand hover:text-white">01573 5230786</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
