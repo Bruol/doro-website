@@ -3,6 +3,7 @@
   "name": "doro-website",
   "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2026-08-01",
+  "previews": {},
   "compatibility_flags": [
     "nodejs_compat"
   ],
